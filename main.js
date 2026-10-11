@@ -67,6 +67,20 @@
   var form = document.querySelector('form.updates');
   if (form) {
     var status = form.querySelector('.updates-status');
+
+    // Phone: format as (xxx) xxx-xxxx while typing
+    var phone = form.elements.phone;
+    if (phone) {
+      phone.addEventListener('input', function () {
+        var d = phone.value.replace(/\D/g, '');
+        if (d.length > 10 && d.charAt(0) === '1') d = d.slice(1);
+        d = d.slice(0, 10);
+        phone.value = !d ? '' : d.length < 4 ? '(' + d
+          : d.length < 7 ? '(' + d.slice(0, 3) + ') ' + d.slice(3)
+          : '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6);
+      });
+    }
+
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       var ok = true;
@@ -84,7 +98,7 @@
         .then(function (r) {
           if (!r.ok) throw new Error();
           form.reset();
-          status.textContent = 'Thank you. You\u2019ll hear from Layered Health when it opens.';
+          status.textContent = 'Thanks for joining our mailing list!';
         })
         .catch(function () { status.textContent = 'Something went wrong. Please try again, or email info@layered.health.'; });
     });
