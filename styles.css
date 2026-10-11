@@ -307,3 +307,606 @@ a:focus-visible, button:focus-visible {
   .lh-tex .sheet { display: none; }
   .lh-tex .face { color: CanvasText; background: none; }
 }
+
+/* ===================== v2: fuller home page ===================== */
+
+/* 3. Sticky header with a clear action */
+.site-header[data-sticky] {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  transition: padding 0.25s ease, box-shadow 0.25s ease;
+}
+.site-header.is-scrolled { padding-top: 12px; padding-bottom: 12px; box-shadow: 0 1px 0 var(--hairline); }
+.site-nav { align-items: center; }
+.site-nav a[aria-current="page"] { color: var(--ink); }
+.site-nav .nav-cta {
+  white-space: nowrap;
+  padding: 11px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--action);
+  color: var(--on-action);
+  letter-spacing: 0.02em;
+}
+.site-nav .nav-cta:hover { background: #1f1e1c; color: var(--on-action); }
+
+/* 1. Interactive hero: each layer drifts at its own rate */
+/* Each layer sways gently side to side on its own rhythm (transform),
+   and drifts apart on scroll (the separate `translate` property, set by main.js). */
+@keyframes lh-sway { 0% { transform: translateX(-12px); } 100% { transform: translateX(12px); } }
+.hero-bands .band { animation: lh-sway 7s ease-in-out infinite alternate; will-change: transform, translate; }
+.hero-bands .l2 { animation-duration: 8.5s; animation-delay: -2s; }
+.hero-bands .l3 { animation-duration: 9.5s; animation-delay: -5s; }
+.hero-bands .l4 { animation-duration: 7.75s; animation-delay: -3.5s; }
+
+/* 4. One slow scrolling band of words */
+.marquee {
+  position: relative;
+  background: var(--ink);
+  color: var(--surface);
+  padding: 22px 0;
+  overflow: hidden;
+}
+.marquee-viewport { display: flex; width: max-content; animation: marquee 70s linear infinite; }
+.marquee.is-paused .marquee-viewport,
+.marquee:hover .marquee-viewport { animation-play-state: paused; }
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.marquee-track li {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+.marquee-track li::after {
+  content: "";
+  display: inline-block;
+  width: 34px;
+  height: 12px;
+  margin: 0 28px;
+  border-radius: var(--radius-pill);
+  background: var(--slate);
+}
+.marquee-track li:nth-child(3n+2)::after { background: var(--rose); }
+.marquee-track li:nth-child(3n)::after { background: var(--sage); }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-toggle {
+  position: absolute;
+  right: var(--gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  padding: 8px 14px;
+  border: 1px solid var(--surface);
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--surface);
+  font: 800 12px/1 var(--font-sans);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.marquee-toggle:focus-visible { outline: 2px solid var(--surface); outline-offset: 2px; }
+
+/* 2 + 5. The story, section by section, with more room and larger type */
+.v2-section {
+  padding: clamp(80px, 10vw, 144px) var(--gutter);
+  border-top: 1px solid var(--hairline);
+}
+.marquee + .v2-section { border-top: 0; }
+.eyebrow {
+  margin: 0 0 18px;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.v2-h2 {
+  margin: 0;
+  max-width: 18ch;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.1rem, 4.6vw, 3.75rem);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+.v2-display {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 6.4vw, 5.25rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.v2-h2-sub {
+  margin: 14px 0 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.2rem, 2.2vw, 1.75rem);
+  line-height: 1.2;
+  color: var(--ink-muted);
+}
+.v2-lede {
+  margin: clamp(28px, 3vw, 40px) 0 0;
+  max-width: 60ch;
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  line-height: 1.6;
+}
+.v2-body {
+  margin: 20px 0 0;
+  max-width: 62ch;
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  line-height: 1.8;
+}
+
+/* How the work goes: three offset layers */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin: clamp(40px, 5vw, 72px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.step {
+  position: relative;
+  padding: 0 28px 36px;
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-layer);
+  overflow: hidden;
+}
+.step-2 { margin-top: var(--space-6); }
+.step-3 { margin-top: calc(var(--space-6) * 2); }
+.step-band { display: block; height: 14px; margin: 0 -28px 28px; }
+.step-1 .step-band { background: var(--slate); }
+.step-2 .step-band { background: var(--rose); }
+.step-3 .step-band { background: var(--sage); }
+.step-n { font-weight: 800; font-size: 13px; letter-spacing: 0.12em; color: var(--ink-muted); }
+.step h3 {
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.4rem, 2vw, 1.75rem);
+  line-height: 1.1;
+}
+.step p { margin: 14px 0 0; font-size: 1.02rem; line-height: 1.7; }
+
+/* Who Clay works with: tag cards */
+.who-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin: clamp(36px, 4vw, 56px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.who-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 180px;
+  padding: 26px 28px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background: var(--surface-raised);
+  transition: box-shadow 0.25s ease;
+}
+.who-card:hover { box-shadow: var(--shadow-layer); }
+.who-card h3 {
+  margin: auto 0 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+  line-height: 1.15;
+}
+.tag {
+  align-self: flex-start;
+  padding: 7px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--sage);
+  color: var(--on-color);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+/* Meet Clay teaser */
+.meet-teaser {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.text-link {
+  display: inline-block;
+  margin-top: 28px;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--ink);
+  text-underline-offset: 4px;
+}
+.text-link::after { content: " \2192"; }
+
+/* Launching Summer 2027 */
+.launch-cta { position: relative; overflow: hidden; background: var(--surface-sunk); border-top: 0; }
+.launch-copy { position: relative; z-index: 1; max-width: 56%; }
+.launch-cta .button { margin-top: 36px; }
+.cta-bands {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(520px, 40vw);
+  height: auto;
+  aspect-ratio: 720 / 284;
+  z-index: 0;
+}
+.cta-bands .l1 { fill: var(--ink); }
+.cta-bands .l2 { fill: var(--slate); }
+.cta-bands .l3 { fill: var(--rose); }
+.cta-bands .l4 { fill: var(--sage); }
+.launch-cta + .site-footer, main + .site-footer { border-top: 1px solid var(--hairline); }
+
+/* Phones */
+@media (max-width: 720px) {
+  .site-nav { gap: 14px; }
+  .site-nav .nav-cta { padding: 10px 13px; font-size: 13px; }
+  .marquee-toggle { right: 12px; padding: 6px 10px; font-size: 11px; }
+  .steps, .who-cards { grid-template-columns: 1fr; }
+  .step-2, .step-3 { margin-top: 0; }
+  .step-2 { margin-left: var(--space-6); }
+  .step-3 { margin-left: calc(var(--space-6) * 2); }
+  .who-card { min-height: 0; }
+  .meet-teaser { grid-template-columns: 1fr; }
+  .launch-copy { max-width: none; }
+  .cta-bands { position: relative; display: block; top: auto; transform: none; width: 72vw; margin: 0 calc(var(--gutter) * -1) 40px auto; }
+}
+
+/* Motion off for people who ask for less */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-viewport { animation: none; flex-wrap: wrap; width: auto; }
+  .marquee-track[aria-hidden="true"], .marquee-toggle { display: none; }
+  .marquee-track { flex-wrap: wrap; padding: 0 var(--gutter); row-gap: 14px; }
+  .hero-bands .band { animation: none; transform: none; translate: none !important; }
+  .site-header[data-sticky] { transition: none; }
+}
+
+/* Layered headlines: a solid rose sheet offset under the big display type (no blur) */
+.launch-cta .v2-display {
+  text-shadow: 0.045em 0.045em 0 var(--rose);
+}
+
+/* ===================== Sheets, press buttons, logo tab ===================== */
+:root {
+  --tint-rose: #f3e3df;
+  --tint-slate: #e1e5eb;
+  --tint-sage: #e3e8da;
+  --sheet-r: clamp(28px, 4vw, 56px);
+  --sheet-edge: 0 -1px 0 rgba(43, 42, 40, 0.10);
+}
+
+/* 1. Sections are stacked sheets: each rounds up over the one before it */
+main > .v2-section {
+  position: relative;
+  border-top: 0;
+  border-radius: var(--sheet-r) var(--sheet-r) 0 0;
+  margin-top: calc(var(--sheet-r) * -1);
+  padding-bottom: calc(clamp(80px, 10vw, 144px) + var(--sheet-r));
+  box-shadow: var(--sheet-edge);
+}
+main > .why { background: var(--tint-rose); }
+main > .how { background: var(--surface); }
+main > .who { background: var(--tint-slate); }
+main > .meet-teaser { background: var(--tint-sage); }
+main > .launch-cta { background: var(--surface-raised); }
+.page-about .section + .section {
+  border-top: 0;
+  border-radius: var(--sheet-r) var(--sheet-r) 0 0;
+  margin-top: calc(var(--sheet-r) * -1);
+  background: var(--tint-slate);
+  box-shadow: var(--sheet-edge);
+}
+main + .site-footer,
+.launch-cta + .site-footer {
+  position: relative;
+  border-top: 0;
+  border-radius: var(--sheet-r) var(--sheet-r) 0 0;
+  margin-top: calc(var(--sheet-r) * -1);
+  box-shadow: var(--sheet-edge);
+}
+
+/* 2. Buttons sit on a solid rose edge and press down into it */
+.button,
+.site-nav .nav-cta {
+  position: relative;
+  border: 2px solid var(--ink);
+  box-shadow: 0 5px 0 0 var(--rose);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.button:hover, .button:focus-visible,
+.site-nav .nav-cta:hover, .site-nav .nav-cta:focus-visible {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 0 var(--rose);
+}
+.button:active, .site-nav .nav-cta:active { transform: translateY(5px); box-shadow: none; }
+/* Cards keep a crisp colored edge instead of a soft shadow */
+.step { box-shadow: 0 6px 0 0 var(--hairline); border: 1px solid var(--hairline); }
+.step-1 { box-shadow: 0 6px 0 0 var(--slate); }
+.step-2 { box-shadow: 0 6px 0 0 var(--rose); }
+.step-3 { box-shadow: 0 6px 0 0 var(--sage); }
+.who-card { box-shadow: 0 6px 0 0 var(--rose); }
+.who-card:nth-child(2) { box-shadow: 0 6px 0 0 var(--sage); }
+.who-card:nth-child(3) { box-shadow: 0 6px 0 0 var(--slate); }
+.who-card:hover { box-shadow: 0 6px 0 0 var(--rose); }
+.who-card:nth-child(2):hover { box-shadow: 0 6px 0 0 var(--sage); }
+.who-card:nth-child(3):hover { box-shadow: 0 6px 0 0 var(--slate); }
+
+/* let the swaying layers travel past the art box instead of being clipped flat */
+.hero-bands, .cta-bands { overflow: visible; }
+
+/* ===================== Round 2 edits ===================== */
+/* Header: lockup back on the left; About + Contact Clay as a pair of press buttons */
+.site-nav { gap: 12px; }
+.site-nav .nav-btn {
+  position: relative;
+  white-space: nowrap;
+  padding: 11px 20px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-pill);
+  background: var(--action);
+  color: var(--on-action);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 5px 0 0 var(--rose);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.site-nav .nav-secondary { box-shadow: 0 5px 0 0 var(--slate); }
+.site-nav .nav-btn:hover, .site-nav .nav-btn:focus-visible { color: var(--on-action); background: #1f1e1c; transform: translateY(5px); box-shadow: 0 0 0 0 transparent; }
+.site-nav .nav-btn:active { transform: translateY(5px); box-shadow: none; }
+
+/* Tighter sections */
+main > .v2-section {
+  padding-top: clamp(48px, 6vw, 88px);
+  padding-bottom: calc(clamp(48px, 6vw, 88px) + var(--sheet-r));
+}
+.v2-lede { margin-top: clamp(18px, 2vw, 28px); }
+.steps, .who-cards { margin-top: clamp(28px, 3vw, 44px); }
+.hero { min-height: 0; padding-bottom: calc(clamp(48px, 6vw, 80px) + var(--sheet-r)); }
+.page-about .section { padding-top: clamp(40px, 5vw, 72px); padding-bottom: clamp(40px, 5vw, 72px); }
+.page-about .section + .section { padding-top: calc(clamp(40px, 5vw, 72px) + 8px); }
+.launch-cta .button { margin-top: 28px; }
+
+/* Why: copy beside a layered video frame */
+.nw { white-space: nowrap; }
+.why { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: clamp(32px, 5vw, 80px); align-items: center; }
+.why .v2-h2 { max-width: none; }
+.why-media { margin: 0; }
+.media-stack { position: relative; padding: 0 18px 18px 0; }
+.media-stack::before, .media-stack::after { content: ""; position: absolute; border-radius: var(--radius-md); }
+.media-stack::before { inset: 18px 0 0 18px; background: var(--sage); }
+.media-stack::after { inset: 9px 9px 9px 9px; background: var(--rose); }
+.why-video { position: relative; z-index: 1; display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-md); background: #1b1d24; }
+.video-toggle {
+  position: absolute; z-index: 2; right: 32px; bottom: 32px;
+  padding: 7px 12px; border: 1px solid rgba(242, 237, 228, 0.7); border-radius: var(--radius-pill);
+  background: rgba(43, 42, 40, 0.55); color: var(--surface);
+  font: 800 11px/1 var(--font-sans); letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+}
+.video-toggle:focus-visible { outline: 2px solid var(--surface); outline-offset: 2px; }
+
+/* How: three equal steps */
+.steps { align-items: stretch; grid-auto-rows: 1fr; }
+.step-2, .step-3 { margin-top: 0; margin-left: 0; }
+
+/* Smaller headshots */
+.meet-teaser { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); }
+.meet-teaser .photo-stack { max-width: 340px; }
+.page-about .headshot .photo-stack { max-width: 340px; }
+
+@media (max-width: 720px) {
+  .site-nav { gap: 8px; }
+  .site-nav .nav-btn { padding: 9px 12px; font-size: 13px; box-shadow: 0 4px 0 0 var(--rose); }
+  .site-nav .nav-secondary { box-shadow: 0 4px 0 0 var(--slate); }
+  .lockup img { height: 32px; }
+  .why { grid-template-columns: 1fr; }
+  .why .v2-h2 { font-size: clamp(1.6rem, 7.6vw, 2.1rem); }
+  .step-2, .step-3 { margin-left: 0; }
+  .meet-teaser { grid-template-columns: 1fr; }
+  .meet-teaser .photo-stack, .page-about .headshot .photo-stack { max-width: 260px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-nav .nav-btn { transition: none; }
+}
+
+/* ===================== Round 3 edits ===================== */
+:root {
+  --h2-v2: clamp(1.6rem, 3.1vw, 2.5rem);      /* section headers, 2/3 of the old size */
+  --text-v2: 1.05rem;                           /* lede + body copy in sections */
+}
+/* Hero fills a typical first screen */
+.hero { min-height: min(calc(100vh - 88px), 780px); }
+/* Layer by Layer: slate face with the same grain + rose sheet as Self-Discovery */
+.hero h1 .lh-tex.lh-slate { display: block; width: max-content; }
+.lh-slate .face {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0  1 0 0 0 0  1 0 0 0 0  0 0 0 0 1' result='g'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='0.9' intercept='0.05'/%3E%3CfeFuncG type='linear' slope='0.9' intercept='0.05'/%3E%3CfeFuncB type='linear' slope='0.9' intercept='0.05'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"), linear-gradient(172deg, #66717f 0%, #56616f 50%, #4a5460 100%);
+  background-blend-mode: soft-light, normal;
+}
+
+/* One header size and one text size across sections */
+.v2-section .v2-h2 { font-size: var(--h2-v2); line-height: 1.08; }
+.why .v2-lede, .who .v2-lede, .who .v2-body { font-size: var(--text-v2); line-height: 1.7; max-width: 62ch; }
+.who .v2-body { margin-top: 14px; }
+
+/* Why: video runs the full height of the copy, a little narrower */
+.why { grid-template-columns: minmax(0, 1fr) minmax(0, 0.72fr); align-items: stretch; }
+.why-media, .why-media .media-stack { height: 100%; }
+.why-video { height: 100%; aspect-ratio: auto; min-height: 260px; }
+
+/* Who cards: names centered in the space under the tag, on matching lines */
+.who-card { min-height: 170px; }
+.who-card h3 { margin: auto 0; font-size: clamp(1.05rem, 1.4vw, 1.25rem); line-height: 1.2; }
+
+/* Launch: half-size headline, header-size button, sign-up form */
+.launch-cta .v2-display { font-size: clamp(1.6rem, 3.2vw, 2.625rem); }
+.launch-cta .v2-h2-sub { margin-top: 10px; font-size: clamp(1.05rem, 1.6vw, 1.3rem); }
+.button.button-sm {
+  margin-top: 22px;
+  padding: 11px 20px;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.updates {
+  margin-top: 36px;
+  max-width: 600px;
+  padding: 24px 26px 22px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: 0 6px 0 0 var(--sage);
+}
+.updates-title { margin: 0; font-family: var(--font-display); font-weight: 900; font-size: 1.25rem; line-height: 1.2; }
+.updates-note { margin: 6px 0 0; font-size: 0.92rem; line-height: 1.5; color: var(--ink-muted); }
+.updates-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; margin-top: 18px; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field > span { font-weight: 800; font-size: 13px; letter-spacing: 0.02em; }
+.field em { font-style: normal; font-weight: 400; color: var(--ink-muted); }
+.field input, .field select {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1.5px solid #c9c0b2;
+  border-radius: 10px;
+  background: #fffdf9;
+  color: var(--ink);
+  font: 400 15px/1.3 var(--font-sans);
+}
+.field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 1px; border-color: var(--ink); }
+.field input[aria-invalid="true"] { border-color: #b4534a; }
+.field-submit { justify-content: flex-end; }
+.field-submit .button { margin-top: 0; width: 100%; }
+.updates-status { margin: 12px 0 0; font-size: 0.92rem; min-height: 1.2em; }
+.launch-copy { max-width: min(600px, 52%); }
+
+/* About page: same header and text sizes as the home page; headshot centered against the bio */
+.page-about .intro h1, .page-about .meet h2 { font-size: var(--h2-v2); line-height: 1.12; }
+.page-about .intro .lede, .page-about .bio p { font-size: var(--text-v2); line-height: 1.7; }
+.page-about .meet-grid { align-items: center; margin-top: clamp(28px, 3vw, 44px); }
+.page-about .bio { margin-top: 0; }
+
+@media (max-width: 720px) {
+  .hero { min-height: min(calc(100svh - 66px), 700px); }
+  .why { grid-template-columns: 1fr; }
+  .hero .bg-layers.in-color { margin-top: auto; }
+  .why .v2-h2 { font-size: var(--h2-v2); }
+  .why-video { height: auto; aspect-ratio: 4 / 5; }
+  .why-media, .why-media .media-stack { height: auto; }
+  .who-card { min-height: 0; }
+  .launch-copy { max-width: none; }
+  .updates { padding: 20px 18px 18px; }
+  .updates-grid { grid-template-columns: 1fr; }
+}
+
+/* About page Contact Clay matches the header buttons */
+.page-about .headshot .button { padding: 11px 20px; font-size: 15px; letter-spacing: 0.02em; text-transform: none; }
+
+/* Who: portrait in a layered, organic shape beside the copy */
+.who-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.62fr); gap: clamp(28px, 4vw, 64px); align-items: center; }
+.who-art { margin: 0; justify-self: center; width: 100%; max-width: 440px; }
+.who-art svg { display: block; width: 100%; height: auto; }
+.who-art .wb-sage { fill: var(--sage); }
+.who-art .wb-rose { fill: var(--rose); }
+@media (max-width: 720px) {
+  .who-top { grid-template-columns: 1fr; }
+  .who-art { max-width: 300px; }
+}
+
+.updates .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+/* ===================== Round 4 edits ===================== */
+/* Hero: more room on top, a third less below; bands centered on the headline */
+.hero { min-height: 0; padding-top: clamp(56px, 8vw, 116px); padding-bottom: calc(clamp(90px, 13vw, 190px) + var(--sheet-r)); }
+.hero-copy { position: relative; }
+.hero-head { position: static; }
+.hero-head .bg-layers.in-color { position: absolute; top: 50%; bottom: auto; right: calc(var(--gutter) * -1); transform: translateY(-50%); z-index: 0; }
+.hero-head h1 { position: relative; z-index: 1; }
+
+/* Why: bigger headline, taller video */
+.why .v2-h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); }
+.why-copy { align-self: center; }
+.why-video { min-height: clamp(380px, 36vw, 520px); }
+
+/* Who: half the space on top; copy sits a little lower under the headline */
+main > .who { padding-top: clamp(24px, 3vw, 44px); }
+.who .v2-lede { margin-top: clamp(26px, 2.6vw, 36px); }
+.who .v2-body { margin-top: 18px; }
+
+/* Launch: headline on one line, no button */
+.launch-cta .v2-display { white-space: nowrap; }
+.launch-copy { max-width: none; }
+.launch-cta .updates { margin-top: 28px; }
+
+/* About: more space under the intro and under Meet Clay; bio wraps around the photo */
+.page-about .intro { padding-bottom: calc(clamp(40px, 5vw, 72px) + 40px); }
+.page-about .meet { padding-bottom: calc(clamp(40px, 5vw, 72px) + 40px); }
+.page-about .meet-wrap { margin-top: clamp(24px, 2.4vw, 32px); max-width: 940px; }
+.page-about .meet-wrap::after { content: ""; display: block; clear: both; }
+.page-about .meet-wrap .headshot { float: left; width: 300px; margin: 6px clamp(32px, 4vw, 56px) 20px 0; gap: 24px; }
+.page-about .meet-wrap .headshot .photo-stack { max-width: none; }
+.page-about .meet-wrap > p { margin: 0 0 22px; max-width: none; font-size: var(--text-v2); line-height: 1.75; }
+.page-about .meet-wrap > p:last-child { margin-bottom: 0; }
+
+@media (max-width: 720px) {
+  .hero { padding-top: 40px; padding-bottom: calc(48px + var(--sheet-r)); }
+  .hero-copy, .hero-head { display: contents; }
+  .hero-head h1 { order: 0; }
+  .hero-sub { order: 1; }
+  .hero-head .bg-layers.in-color { position: relative; order: 2; top: auto; transform: none; right: auto; margin: 32px calc(var(--gutter) * -1) 0 0; }
+  .why .v2-h2 { font-size: clamp(1.7rem, 7.8vw, 2.2rem); }
+  .why-video { min-height: 0; }
+  .launch-cta .v2-display { font-size: 5.3vw; }
+  .page-about .meet-wrap .headshot { float: none; width: auto; max-width: 280px; margin: 0 auto 28px; }
+}
+
+/* ===================== Round 5 edits ===================== */
+main > .why { padding-top: clamp(24px, 3vw, 44px); padding-bottom: calc(clamp(24px, 3vw, 44px) + var(--sheet-r)); }
+.why .v2-lede { max-width: none; }
+.page-about .intro { padding-bottom: calc(clamp(40px, 5vw, 72px) + 76px); }
+@media (min-width: 721px) {
+  .page-about .meet > h2, .page-about .meet-wrap { margin-left: clamp(24px, 4vw, 64px); }
+  .page-about .meet-wrap .headshot { margin-right: clamp(44px, 5vw, 72px); }
+}
+@media (max-width: 1199px) { .br-d { display: none; } }
+
+/* ===================== Round 6: phone polish ===================== */
+.br-m { display: none; }
+@media (max-width: 720px) {
+  .br-m { display: inline; }
+  .page-about .intro h1 { font-size: 1.5rem; line-height: 1.18; }
+  .page-about .meet h2 { font-size: 1.75rem; line-height: 1.1; }
+  .why-video { aspect-ratio: 5 / 4; }
+  .page-about .site-footer { padding-top: 44px; }
+}
+
+/* ===================== Round 7 ===================== */
+/* Header buttons a third smaller on phones only */
+@media (max-width: 720px) {
+  .site-nav { gap: 6px; }
+  .site-nav .nav-btn { padding: 6px 9px; font-size: 11px; box-shadow: 0 3px 0 0 var(--rose); }
+  .site-nav .nav-secondary { box-shadow: 0 3px 0 0 var(--slate); }
+  .site-nav .nav-btn:hover, .site-nav .nav-btn:focus-visible, .site-nav .nav-btn:active { transform: translateY(3px); }
+  /* About: half the gap between the bands and Meet Clay */
+  .page-about .intro { padding-bottom: 72px; }
+}
