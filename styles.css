@@ -1127,5 +1127,5 @@ svg.launch-art { aspect-ratio: 908 / 797.6; overflow: visible; }
 .page-about .intro .bg-layers g[class^="l"] { will-change: transform; }
 /* About mark: smaller and inside the margin on wider screens, so the drifting bands stay in frame */
 @media (min-width: 721px) {
-  .page-about .intro .bg-layers.colored { width: min(440px, 32vw); right: calc(var(--gutter) + 4vw); overflow: visible; }
+  .page-about .intro .bg-layers.colored { width: min(440px, 32vw); right: calc(var(--gutter) + 4vw); bottom: calc(clamp(24px, 4vw, 56px) + clamp(36px, 3.5vw, 52px)); overflow: visible; }
 }
