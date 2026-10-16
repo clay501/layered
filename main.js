@@ -143,9 +143,10 @@
     tint();
   }
 
-  // Why and Launch marks: the bands slide apart and back as each section passes through the screen
+  // Why, About and Launch marks: the bands slide apart and back as each section passes through the screen
   var drifters = reduce ? [] : [
     { box: document.querySelector('.why-art'), bands: '.why-bands g.l1, .why-bands g.l2, .why-bands g.l3, .why-bands g.l4', amp: [-70, 46, -34, 62], unit: 'px' },
+    { box: document.querySelector('.page-about .intro .bg-layers'), bands: '.page-about .intro .bg-layers g.l1, .page-about .intro .bg-layers g.l2, .page-about .intro .bg-layers g.l3, .page-about .intro .bg-layers g.l4', amp: [-70, 46, -34, 62], unit: 'px', fromTop: true },
     { box: document.querySelector('svg.launch-art'), bands: 'svg.launch-art g.l1, svg.launch-art g.l2, svg.launch-art g.l3, svg.launch-art g.l4', amp: [-11, 7.5, -5.5, 9.5], unit: 'px', whole: true }
   ].filter(function (d) { return d.box; }).map(function (d) {
     d.els = Array.prototype.slice.call(document.querySelectorAll(d.bands));
@@ -158,7 +159,10 @@
       drifters.forEach(function (d) {
         var r = d.box.getBoundingClientRect();
         // -1 as the mark enters from below, 0 when centered, 1 as it leaves at the top
-        var p = Math.max(-1, Math.min(1, ((vh / 2) - (r.top + r.height / 2)) / (vh / 2 + r.height / 2)));
+        var p = d.fromTop
+          // starts stacked at the top of the page and drifts apart until the mark scrolls off
+          ? Math.min(1, window.scrollY / Math.max(1, r.bottom + window.scrollY))
+          : Math.max(-1, Math.min(1, ((vh / 2) - (r.top + r.height / 2)) / (vh / 2 + r.height / 2)));
         d.els.forEach(function (el, i) { el.style.transform = 'translate(' + (d.amp[i] * p).toFixed(2) + d.unit + ', 0)'; });
         if (d.whole) { d.box.style.translate = '0 ' + (p * -36).toFixed(1) + 'px'; d.box.style.rotate = (p * 8).toFixed(2) + 'deg'; }
       });

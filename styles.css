@@ -1124,3 +1124,4 @@ main > .why { padding-top: clamp(44px, 5vw, 76px); padding-bottom: calc(clamp(44
 /* Marks that drift with scroll (main.js): keep the inline launch mark's proportions, let bands slide past the edge */
 svg.launch-art { aspect-ratio: 908 / 797.6; overflow: visible; }
 .why-bands g[class^="l"], .launch-art g[class^="l"] { will-change: transform; }
+.page-about .intro .bg-layers g[class^="l"] { will-change: transform; }
