@@ -1091,7 +1091,7 @@ main > .why { padding-top: clamp(44px, 5vw, 76px); padding-bottom: calc(clamp(44
 
 /* ===================== Footer: blog column + LinkedIn ===================== */
 .footer-blog { display: flex; flex-direction: column; gap: 8px; }
-.footer-label { margin: 0; font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+.footer-label { margin: 0; font-size: 13px; font-weight: 900; letter-spacing: 0.02em; color: var(--ink); }
 .footer-blog a { font-weight: 800; font-size: 13px; letter-spacing: 0.02em; color: var(--ink-muted); text-underline-offset: 3px; }
 .footer-blog a:hover { color: var(--ink); }
 @media (min-width: 721px) {
