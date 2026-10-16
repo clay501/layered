@@ -1125,3 +1125,7 @@ main > .why { padding-top: clamp(44px, 5vw, 76px); padding-bottom: calc(clamp(44
 svg.launch-art { aspect-ratio: 908 / 797.6; overflow: visible; }
 .why-bands g[class^="l"], .launch-art g[class^="l"] { will-change: transform; }
 .page-about .intro .bg-layers g[class^="l"] { will-change: transform; }
+/* About mark: smaller and inside the margin on wider screens, so the drifting bands stay in frame */
+@media (min-width: 721px) {
+  .page-about .intro .bg-layers.colored { width: min(440px, 32vw); right: calc(var(--gutter) + 4vw); overflow: visible; }
+}
