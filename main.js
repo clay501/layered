@@ -80,7 +80,6 @@
           : '(' + d.slice(0, 3) + ') ' + d.slice(3, 6) + '-' + d.slice(6);
       });
     }
-
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
       var ok = true;
@@ -102,5 +101,20 @@
         })
         .catch(function () { status.textContent = 'Something went wrong. Please try again, or email info@layered.health.'; });
     });
+  }
+
+  // Full-bleed hero video: pause button; stays still for people who ask for less motion
+  var hv = document.querySelector('.hero-bg');
+  var ht = document.querySelector('.hero-toggle');
+  if (hv && ht) {
+    var setHero = function (paused) {
+      if (paused) { hv.pause(); ht.textContent = 'Play'; ht.setAttribute('aria-pressed', 'true'); ht.setAttribute('aria-label', 'Play background video'); }
+      else { var pr = hv.play(); if (pr && pr.catch) pr.catch(function () {}); ht.textContent = 'Pause'; ht.setAttribute('aria-pressed', 'false'); ht.setAttribute('aria-label', 'Pause background video'); }
+    };
+    ht.addEventListener('click', function () { setHero(!hv.paused); });
+    // keep it looping even where the loop attribute is ignored
+    hv.loop = true;
+    hv.addEventListener('ended', function () { if (ht.getAttribute('aria-pressed') !== 'true') { hv.currentTime = 0; var pr = hv.play(); if (pr && pr.catch) pr.catch(function () {}); } });
+    if (reduce) { hv.removeAttribute('autoplay'); setHero(true); }
   }
 })();
