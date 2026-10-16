@@ -1,4 +1,4 @@
-# Layered Health (v2)
+# Layered Health (v3: video hero)
 
 A fuller home page: moving hero layers, a story told section by section, a sticky header with About and Contact Clay buttons, a looping video in the Why section, and sections that stack like sheets.
 

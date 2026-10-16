@@ -910,3 +910,144 @@ main > .why { padding-top: clamp(24px, 3vw, 44px); padding-bottom: calc(clamp(24
   /* About: half the gap between the bands and Meet Clay */
   .page-about .intro { padding-bottom: 72px; }
 }
+
+/* ===================== v3: full-bleed video hero ===================== */
+.hero.hero-video {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  min-height: clamp(560px, calc(100svh - 88px), 920px);
+  padding: 0;
+  overflow: hidden;
+  background: #1c1d22;
+  color: var(--surface);
+}
+.hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% center; }
+.hero-scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(24, 23, 22, 0.70) 0%, rgba(24, 23, 22, 0.38) 40%, rgba(24, 23, 22, 0) 68%),
+    linear-gradient(0deg, rgba(24, 23, 22, 0.62) 0%, rgba(24, 23, 22, 0) 58%);
+}
+.hero.hero-video .hero-copy {
+  display: block;
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  padding: 0 var(--gutter) calc(clamp(12px, 1.8vw, 26px) + var(--sheet-r));
+}
+.hero.hero-video h1 { font-size: clamp(2rem, 4vw, 3.5rem); color: var(--surface); }
+.hero.hero-video h1 .line-2 { font-size: clamp(1.15rem, 2.5vw, 2.35rem); margin-top: 6px; }
+/* Light faces on the video; the rose sheet still sits behind */
+.hero.hero-video .lh-tex .face { background-image: linear-gradient(172deg, #ffffff 0%, #f2ede4 55%, #e3dccf 100%); }
+.hero.hero-video .lh-slate .face { background-image: linear-gradient(172deg, #d3dae3 0%, #b3bdca 55%, #9eaabb 100%); }
+.hero.hero-video .lh-tex .sheet { color: rgba(212, 165, 160, 0.9); }
+.hero.hero-video .hero-sub { margin-top: clamp(22px, 2.6vw, 34px); font-size: clamp(0.95rem, 1.15vw, 1.1rem); color: var(--surface); }
+.hero.hero-video .hero-sub span + span { color: #c9d0da; }
+.hero-mark { display: block; width: clamp(80px, 7.5vw, 116px); height: auto; margin-top: clamp(24px, 2.8vw, 36px); }
+.hero-toggle {
+  position: absolute; z-index: 2; right: var(--gutter); bottom: calc(var(--sheet-r) + 22px);
+  padding: 7px 12px; border: 1px solid rgba(242, 237, 228, 0.7); border-radius: var(--radius-pill);
+  background: rgba(43, 42, 40, 0.45); color: var(--surface);
+  font: 800 11px/1 var(--font-sans); letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+}
+.hero-toggle:focus-visible { outline: 2px solid var(--surface); outline-offset: 2px; }
+
+/* Why: the layered bands take the video's place */
+.why-art { align-self: center; margin-right: calc(var(--gutter) * -1); }
+.why-bands { display: block; width: 100%; height: auto; aspect-ratio: 612.5 / 288; overflow: visible; }
+
+/* Mark + "Keep me updated" button, side by side */
+.hero-actions { display: flex; align-items: center; gap: clamp(20px, 2.4vw, 32px); margin-top: clamp(24px, 2.8vw, 36px); }
+.hero-actions .hero-mark { margin-top: 0; }
+.hero-cta {
+  display: inline-block; white-space: nowrap;
+  padding: 11px 20px; border: 2px solid var(--surface); border-radius: var(--radius-pill);
+  background: var(--surface); color: var(--ink);
+  font-weight: 800; font-size: 15px; letter-spacing: 0.02em; text-decoration: none;
+  box-shadow: 0 5px 0 0 var(--rose);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.hero-cta:hover, .hero-cta:focus-visible { color: var(--ink); transform: translateY(5px); box-shadow: 0 0 0 0 transparent; }
+.hero-cta:focus-visible { outline: 2px solid var(--surface); outline-offset: 3px; }
+#keep-updated { scroll-margin-top: 110px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (prefers-reduced-motion: reduce) { .hero-cta { transition: none; } }
+
+@media (max-width: 720px) {
+  .hero-cta { padding: 9px 14px; font-size: 13px; box-shadow: 0 4px 0 0 var(--rose); }
+  .hero.hero-video { min-height: min(calc(100svh - 66px), 760px); }
+  .hero-bg { object-position: 30% center; }
+  .hero-scrim { background: linear-gradient(0deg, rgba(24, 23, 22, 0.78) 0%, rgba(24, 23, 22, 0.35) 55%, rgba(24, 23, 22, 0.1) 100%); }
+  .hero.hero-video .hero-copy { padding-bottom: calc(36px + var(--sheet-r)); }
+  .hero.hero-video h1 { font-size: 30px; }
+  .hero.hero-video h1 .line-2 { font-size: 19px; }
+  .hero-toggle { right: 12px; bottom: calc(var(--sheet-r) + 12px); }
+  .why-art { width: 80vw; justify-self: end; margin-top: 8px; }
+}
+
+/* ===================== v3 round 2 ===================== */
+/* Header buttons a little smaller on desktop */
+@media (min-width: 721px) {
+  .site-nav .nav-btn { padding: 9px 17px; font-size: 14px; }
+}
+/* Why: a taller section */
+main > .why { padding-top: clamp(56px, 6.5vw, 96px); padding-bottom: calc(clamp(56px, 6.5vw, 96px) + var(--sheet-r)); }
+/* Expertise cards: no tag, names centered */
+.who-card { min-height: 150px; justify-content: center; }
+.who-card h3 { margin: 0; font-size: clamp(1.1rem, 1.5vw, 1.35rem); line-height: 1.25; }
+/* Process headline on one line */
+.how .v2-h2.one-line { max-width: none; }
+@media (min-width: 900px) { .how .v2-h2.one-line { white-space: nowrap; } }
+/* Meet the founder: photo and copy shifted left */
+.meet-teaser { gap: clamp(36px, 4vw, 60px); }
+@media (min-width: 721px) { .meet-teaser .photo-stack { margin-left: -16px; } }
+/* Launch: smaller headline, nested layered form instead of the band mark */
+.launch-cta .v2-display { font-size: clamp(1.45rem, 2.7vw, 2.2rem); }
+.launch-cta .updates { margin-top: 32px; }
+.launch-art { position: absolute; right: clamp(24px, 6vw, 110px); top: 50%; transform: translateY(-50%); width: min(400px, 30vw); height: auto; z-index: 0; }
+@media (max-width: 720px) {
+  .launch-art { position: relative; display: block; right: auto; top: auto; transform: none; width: 56vw; margin: 0 0 32px auto; }
+}
+@media (max-width: 720px) { .launch-cta .v2-display { font-size: 5.3vw; } }
+
+/* Meet the founder: copy shifted right in its pane */
+@media (min-width: 721px) {
+  .meet-teaser .photo-stack { margin-left: clamp(24px, 4vw, 72px); }
+  .meet-teaser .meet-copy { padding-left: clamp(56px, 8vw, 140px); }
+}
+/* Founder name a step smaller */
+.meet-teaser .v2-h2 { font-size: clamp(1.45rem, 2.6vw, 2.1rem); }
+
+/* Process headline: more air between the three words */
+.how .v2-h2.one-line { word-spacing: 0.4em; }
+/* Launch: tilted mark larger, centered beside the headline + form */
+@media (min-width: 721px) {
+  .launch-cta { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: clamp(32px, 5vw, 80px); }
+  .launch-cta .launch-copy { order: 1; max-width: 600px; }
+  .launch-cta .launch-art { order: 2; position: static; transform: none; width: min(500px, 36vw); height: auto; margin-right: clamp(0px, 3vw, 56px); }
+}
+/* Launch copy + form nudged right; header buttons spaced and pulled in from the edge */
+@media (min-width: 721px) {
+  .launch-cta .launch-copy { margin-left: clamp(24px, 4vw, 72px); }
+  .site-header .site-nav { gap: 16px; margin-right: clamp(12px, 2vw, 32px); }
+}
+/* Why: bands centered on the copy; section a touch shorter */
+.why-media.why-art { height: auto; align-self: center; }
+main > .why { padding-top: clamp(44px, 5vw, 76px); padding-bottom: calc(clamp(44px, 5vw, 76px) + var(--sheet-r)); }
+@media (min-width: 721px) { .site-header .site-nav { gap: 24px; } }
+/* Why: copy nudged right in its panel */
+@media (min-width: 721px) { .why .why-copy { margin-left: clamp(24px, 4vw, 72px); } }
+/* Header: a sheet with rounded bottom corners; the hero video runs up behind it */
+.site-header { border-bottom: 0; border-radius: 0 0 var(--sheet-r) var(--sheet-r); }
+.site-header.is-scrolled { box-shadow: 0 1px 0 var(--hairline); }
+.hero.hero-video { margin-top: calc(var(--sheet-r) * -1); min-height: calc(clamp(560px, calc(100svh - 88px), 920px) + var(--sheet-r)); }
+@media (max-width: 720px) { .hero.hero-video { min-height: calc(min(calc(100svh - 66px), 760px) + var(--sheet-r)); } }
+.site-header, .site-header.is-scrolled { box-shadow: 0 1px 0 rgba(43, 42, 40, 0.12); }
+
+/* About: Keep me updated under the launch line; photo + bio shifted right, heading stays */
+.page-about .about-cta { display: inline-block; position: relative; margin-top: 28px; }
+@media (min-width: 721px) { .page-about .meet-wrap { margin-left: clamp(64px, 9vw, 150px); } }
+.page-about .about-cta { align-self: flex-start; }
