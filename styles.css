@@ -1141,3 +1141,37 @@ svg.launch-art { aspect-ratio: 908 / 797.6; overflow: visible; }
 @media (max-width: 720px) {
   .page-about .intro h1 { font-size: clamp(1.7rem, 7.8vw, 2.2rem); line-height: 1.08; }
 }
+
+/* ===================== Mobile edits ===================== */
+.hero-sub .nw { display: inline; }
+@media (max-width: 720px) {
+  /* Our expertise: image sits right under the heading */
+  .who-top { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+  .who-copy { display: contents; }
+  .who-copy .eyebrow { order: 0; }
+  .who-copy .v2-h2 { order: 1; }
+  .who-top .who-art { order: 2; margin: 28px auto 4px; }
+  .who-copy .v2-lede { order: 3; }
+  .who-copy .v2-body { order: 4; }
+
+  /* Meet the founder: eyebrow above a centered headshot */
+  .meet-teaser { display: flex; flex-direction: column; align-items: stretch; text-align: left; gap: 0; }
+  .meet-teaser .meet-copy { display: contents; }
+  .meet-teaser .eyebrow { order: 0; }
+  .meet-teaser .photo-stack { order: 1; align-self: center; margin: 18px auto 32px; }
+  .meet-teaser .text-link { align-self: flex-start; }
+  .meet-teaser .meet-copy > :not(.eyebrow) { order: 2; }
+
+  /* Launching / Summer / 2027 stacked to the left of the mark, centered with it */
+  .launch-cta { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "title art" "form form"; align-items: center; column-gap: 16px; }
+  .launch-cta .launch-copy { display: contents; }
+  .launch-cta .v2-display { grid-area: title; margin: 0; font-size: clamp(1.45rem, 6.6vw, 2.1rem); line-height: 1.1; }
+  .launch-cta .launch-art { grid-area: art; width: 36vw; margin: 0 2vw 0 0; }
+  .launch-cta form.updates { grid-area: form; margin-top: 36px; }
+
+  /* About: mark sized to stay inside the frame while its bands drift */
+  .page-about .intro .bg-layers.colored { width: 62vw; margin: 28px 9vw 0 0; overflow: visible; }
+
+  /* "One feeling. One story. We are layered." a bit larger (About and home stay matched) */
+  .why .v2-h2-sub, .page-about .intro h1 span + span { font-size: 1.4rem; }
+}
