@@ -861,7 +861,7 @@ main > .who { padding-top: clamp(24px, 3vw, 44px); }
 /* About: more space under the intro and under Meet Clay; bio wraps around the photo */
 .page-about .intro { padding-bottom: calc(clamp(40px, 5vw, 72px) + 40px); }
 .page-about .meet { padding-bottom: calc(clamp(40px, 5vw, 72px) + 40px); }
-.page-about .meet-wrap { margin-top: clamp(24px, 2.4vw, 32px); max-width: 940px; }
+.page-about .meet-wrap { margin-top: clamp(36px, 3.6vw, 52px); max-width: 940px; }
 .page-about .meet-wrap::after { content: ""; display: block; clear: both; }
 .page-about .meet-wrap .headshot { float: left; width: 300px; margin: 6px clamp(32px, 4vw, 56px) 20px 0; gap: 24px; }
 .page-about .meet-wrap .headshot .photo-stack { max-width: none; }
