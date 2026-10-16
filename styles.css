@@ -1129,3 +1129,7 @@ svg.launch-art { aspect-ratio: 908 / 797.6; overflow: visible; }
 @media (min-width: 721px) {
   .page-about .intro .bg-layers.colored { width: min(440px, 32vw); right: calc(var(--gutter) + 4vw); bottom: auto; top: calc((100% - var(--sheet-r)) / 2); translate: 0 -50%; overflow: visible; }
 }
+/* About intro: half the space between "Keep me updated" and the next section on wider screens */
+@media (min-width: 721px) {
+  .page-about .intro { padding-bottom: calc((clamp(40px, 5vw, 72px) + 76px + var(--sheet-r)) / 2); }
+}
