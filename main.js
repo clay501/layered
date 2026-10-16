@@ -142,4 +142,30 @@
     window.addEventListener('resize', tint);
     tint();
   }
+
+  // Why and Launch marks: the bands slide apart and back as each section passes through the screen
+  var drifters = reduce ? [] : [
+    { box: document.querySelector('.why-art'), bands: '.why-bands g.l1, .why-bands g.l2, .why-bands g.l3, .why-bands g.l4', amp: [-34, 22, -16, 30], unit: 'px' },
+    { box: document.querySelector('svg.launch-art'), bands: 'svg.launch-art g.l1, svg.launch-art g.l2, svg.launch-art g.l3, svg.launch-art g.l4', amp: [-5, 3.5, -2.5, 4.5], unit: 'px', whole: true }
+  ].filter(function (d) { return d.box; }).map(function (d) {
+    d.els = Array.prototype.slice.call(document.querySelectorAll(d.bands));
+    return d;
+  });
+  if (drifters.length) {
+    var driftTicking = false;
+    var drift = function () {
+      var vh = window.innerHeight;
+      drifters.forEach(function (d) {
+        var r = d.box.getBoundingClientRect();
+        // -1 as the mark enters from below, 0 when centered, 1 as it leaves at the top
+        var p = Math.max(-1, Math.min(1, ((vh / 2) - (r.top + r.height / 2)) / (vh / 2 + r.height / 2)));
+        d.els.forEach(function (el, i) { el.style.transform = 'translate(' + (d.amp[i] * p).toFixed(2) + d.unit + ', 0)'; });
+        if (d.whole) { d.box.style.translate = '0 ' + (p * -18).toFixed(1) + 'px'; d.box.style.rotate = (p * 4).toFixed(2) + 'deg'; }
+      });
+      driftTicking = false;
+    };
+    window.addEventListener('scroll', function () { if (!driftTicking) { driftTicking = true; window.requestAnimationFrame(drift); } }, { passive: true });
+    window.addEventListener('resize', drift);
+    drift();
+  }
 })();
