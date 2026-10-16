@@ -9,7 +9,8 @@ Website for Layered Health Psychotherapy, a sister identity to Seen/Unfold. Buil
 
 - `index.html`: home ("Self-Discovery / Layer by Layer" with the colored layers)
 - `about.html`: intro and "Meet Clay Klaus-Wade"
-- `blog/what-is-psychodynamic-therapy/index.html`: first blog post, linked from the footer (head tags and JSON-LD inline)
+- `blog/index.html`: blog index, newest first, linked from the footer as "All posts"
+- `blog/<slug>/index.html`: one page per post (head tags and JSON-LD inline, "Keep reading" links at the bottom)
 - `sitemap.xml`: site URLs for search engines
 - `main.js`: scroll reveals, hero layer drift, sticky header state, video play/pause (all respect reduced motion)
 - `styles.css`: shared styles; brand colors live at the top as CSS variables
