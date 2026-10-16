@@ -117,4 +117,29 @@
     hv.addEventListener('ended', function () { if (ht.getAttribute('aria-pressed') !== 'true') { hv.currentTime = 0; var pr = hv.play(); if (pr && pr.catch) pr.catch(function () {}); } });
     if (reduce) { hv.removeAttribute('autoplay'); setHero(true); }
   }
+
+  // Blog post: background fades between the brand tints, one per section, as you scroll
+  var post = document.querySelector('.page-post .post');
+  if (post) {
+    var root = getComputedStyle(document.documentElement);
+    var hex = function (n) { var h = root.getPropertyValue(n).trim().replace('#', ''); return [0, 2, 4].map(function (i) { return parseInt(h.substr(i, 2), 16); }); };
+    var palette = ['--surface', '--tint-rose', '--tint-slate', '--tint-sage'].map(hex);
+    var heads = Array.prototype.slice.call(post.querySelectorAll('.post-body h2'));
+    var tintTicking = false;
+    var tint = function () {
+      var line = window.scrollY + window.innerHeight * 0.3;
+      var stops = [0].concat(heads.map(function (h) { return h.getBoundingClientRect().top + window.scrollY; }));
+      var i = 0;
+      while (i < stops.length - 1 && line >= stops[i + 1]) i++;
+      var b = palette[i % palette.length], a = i ? palette[(i - 1) % palette.length] : b;
+      var next = i < stops.length - 1 ? stops[i + 1] : stops[i] + 600;
+      var t = Math.max(0, Math.min(1, (line - stops[i]) / Math.min(300, (next - stops[i]) * 0.5)));
+      t = t * t * (3 - 2 * t);
+      post.style.backgroundColor = 'rgb(' + a.map(function (v, k) { return Math.round(v + (b[k] - v) * t); }).join(',') + ')';
+      tintTicking = false;
+    };
+    window.addEventListener('scroll', function () { if (!tintTicking) { tintTicking = true; window.requestAnimationFrame(tint); } }, { passive: true });
+    window.addEventListener('resize', tint);
+    tint();
+  }
 })();

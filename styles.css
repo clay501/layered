@@ -1088,3 +1088,18 @@ main > .why { padding-top: clamp(44px, 5vw, 76px); padding-bottom: calc(clamp(44
 }
 .post-body .post-cta { margin: 4px 0 0; }
 .post-body .post-cta .button { margin-top: 0; }
+
+/* ===================== Footer: blog column + LinkedIn ===================== */
+.footer-blog { display: flex; flex-direction: column; gap: 8px; }
+.footer-label { margin: 0; font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); }
+.footer-blog a { font-weight: 800; font-size: 13px; letter-spacing: 0.02em; color: var(--ink-muted); text-underline-offset: 3px; }
+.footer-blog a:hover { color: var(--ink); }
+@media (min-width: 721px) {
+  .footer-grid { grid-template-columns: 1fr auto auto 1fr; column-gap: clamp(32px, 5vw, 72px); }
+}
+@media (max-width: 720px) {
+  .page-about .footer-blog { gap: 4px; }
+}
+
+/* Blog post: background shifts between brand tints as you read (set by main.js) */
+.page-post .post { background-color: var(--surface); }
