@@ -1086,3 +1086,5 @@ main > .why { padding-top: clamp(44px, 5vw, 76px); padding-bottom: calc(clamp(44
 @media (max-width: 720px) {
   .post-body { font-size: 1rem; line-height: 1.7; }
 }
+.post-body .post-cta { margin: 4px 0 0; }
+.post-body .post-cta .button { margin-top: 0; }
