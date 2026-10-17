@@ -1175,3 +1175,11 @@ svg.launch-art { aspect-ratio: 908 / 797.6; overflow: visible; }
   /* "One feeling. One story. We are layered." a bit larger (About and home stay matched) */
   .why .v2-h2-sub, .page-about .intro h1 span + span { font-size: 1.4rem; }
 }
+
+/* Why: second paragraph under "Layered Health was founded..." */
+.why .v2-lede-more { margin-top: 16px; max-width: 46ch; }
+/* Who we serve: equal-height cards, contents centered, captions sized like the Why lede */
+.who-cards { grid-auto-rows: 1fr; }
+.who-card { justify-content: center; gap: 12px; }
+.who-card h3 { margin: 0; }
+.who-cap { margin: 0; font-size: var(--text-v2); line-height: 1.7; color: var(--ink); }
