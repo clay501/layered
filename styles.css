@@ -1177,7 +1177,7 @@ svg.launch-art { aspect-ratio: 908 / 797.6; overflow: visible; }
 }
 
 /* Why: second paragraph under "Layered Health was founded..." */
-.why .v2-lede-more { margin-top: 16px; max-width: 46ch; }
+.why .v2-lede-more { margin-top: 16px; }
 /* Who we serve: equal-height cards, contents centered, captions sized like the Why lede */
 .who-cards { grid-auto-rows: 1fr; }
 .who-card { justify-content: center; gap: 12px; }
