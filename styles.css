@@ -1587,3 +1587,14 @@ main > .meet-teaser {
   .launch-cta .launch-now { grid-area: now; max-width: none; margin-left: clamp(24px, 4vw, 72px); }
   .launch-cta .launch-now-copy { max-width: 880px; }
 }
+/* Hero: the booking button matches "Keep me updated" (vanilla fill, rose edge) and sits to its right at every width */
+.hero-cta-book, .hero-cta-book:hover, .hero-cta-book:focus-visible { background: var(--surface); color: var(--ink); }
+.hero-cta-book { box-shadow: 0 5px 0 0 var(--rose); }
+.hero-cta-book:hover, .hero-cta-book:focus-visible { box-shadow: 0 0 0 0 transparent; }
+@media (max-width: 720px) {
+  .hero-actions { gap: 14px; }
+  .hero-actions .hero-mark { width: 56px; flex: none; }
+  .hero-buttons { flex-direction: row; flex-wrap: nowrap; align-items: stretch; gap: 10px; }
+  .hero-buttons .hero-cta { display: flex; align-items: center; justify-content: center; }
+  .hero-cta-book { box-shadow: 0 4px 0 0 var(--rose); min-width: 0; }
+}
