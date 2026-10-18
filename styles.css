@@ -1448,3 +1448,8 @@ main > .launch-cta { background: var(--tint-slate); }
 .offer-card .v2-body { margin-left: 0; margin-right: 0; }
 /* Who we serve: on desktop, the copy and portrait start at the same inset as the Why copy (the cards stay full width) */
 @media (min-width: 721px) { .who .who-top { margin-left: clamp(24px, 4vw, 72px); } }
+/* What we offer: half the usual top and bottom padding (the bottom keeps room for the next sheet's rounded edge) */
+main > .offer {
+  padding-top: calc(clamp(48px, 6vw, 88px) / 2);
+  padding-bottom: calc(clamp(48px, 6vw, 88px) / 2 + var(--sheet-r));
+}
