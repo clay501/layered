@@ -1422,3 +1422,27 @@ main > .launch-cta { background: var(--tint-slate); }
   object-position: center 10%;
   transform: translate(7%, 3%);
 }
+
+/* ===================== Full headshot, uncropped ===================== */
+/* Home teaser: the whole photo, no 4:5 crop */
+.meet-teaser .photo-stack img { aspect-ratio: auto; object-fit: fill; }
+/* About: the photo column is as wide as the uncropped photo needs to be to run the full height
+   of the bio (main.js sets --photo-w from the bio's height); text sits in the column to its right */
+@media (min-width: 1140px) {
+  .page-about .meet-wrap { grid-template-columns: auto minmax(0, 1fr); max-width: 1120px; }
+  .page-about .meet-wrap .headshot { width: var(--photo-w, 320px); }
+  .page-about .meet-wrap .headshot .photo-stack img { min-height: 0; object-position: center top; }
+}
+/* Tablets: side by side leaves the bio too narrow, so the photo stacks above it, uncropped */
+@media (min-width: 721px) and (max-width: 1139px) {
+  .page-about .meet-wrap { display: block; }
+  .page-about .meet-wrap .headshot { width: auto; max-width: 340px; margin: 0 0 36px; }
+  .page-about .meet-wrap .headshot .photo-stack { height: auto; }
+  .page-about .meet-wrap .headshot .photo-stack img { height: auto; min-height: 0; object-fit: fill; }
+}
+/* What we offer: label and the copy under each photo justified left (the label lines up with the
+   left edge of the centered pair); photos 1.3x their previous size, still centered in each column */
+.offer .eyebrow { text-align: left; width: min(100%, calc(920px + clamp(32px, 5vw, 80px))); margin-left: auto; margin-right: auto; }
+.offer-card { align-items: flex-start; text-align: left; }
+.offer-card .offer-blob { width: 86.67%; align-self: center; }
+.offer-card .v2-body { margin-left: 0; margin-right: 0; }

@@ -301,3 +301,28 @@ window.addEventListener('load', function () {
   var target = id && document.getElementById(id);
   if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
 });
+
+// About: size the headshot column so the whole, uncropped photo runs the full height of the bio
+(function () {
+  var wrap = document.querySelector('.page-about .meet-wrap');
+  if (!wrap || !('ResizeObserver' in window)) return;
+  var shot = wrap.querySelector('.headshot'), text = wrap.querySelector('.meet-text');
+  var img = shot && shot.querySelector('img');
+  if (!img || !text) return;
+  var ratio = (img.getAttribute('width') / img.getAttribute('height')) || 0.667;
+  var stack = 24; // the photo-stack's offset sheets (right and bottom padding)
+  var fit = function () {
+    if (window.innerWidth < 1140) { wrap.style.removeProperty('--photo-w'); return; }
+    // the bio keeps at least 480px; past that the photo trims a little at the sides instead
+    var gap = parseFloat(getComputedStyle(wrap).columnGap) || 0;
+    var cap = wrap.clientWidth - gap - 480;
+    // the bio rewraps as the photo column widens, so settle over a few passes
+    for (var i = 0; i < 4; i++) {
+      var w = Math.round((text.offsetHeight - stack) * ratio + stack);
+      wrap.style.setProperty('--photo-w', Math.min(w, cap) + 'px');
+    }
+  };
+  new ResizeObserver(function () { window.requestAnimationFrame(fit); }).observe(wrap);
+  window.addEventListener('load', fit);
+  fit();
+})();
