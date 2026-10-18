@@ -1384,3 +1384,18 @@ main > .offer { background: var(--surface-raised); }
 }
 /* Individual photo: a little more headroom so she sits lower in the shape */
 .offer-card:nth-child(1) .offer-blob .offer-photo, #individual-therapy .offer-blob .offer-photo { object-position: center 4%; }
+
+/* ===================== Every section on a brand color ===================== */
+/* What we offer cards: same header size as the step cards in the section below */
+.offer-card .v2-h2, .v2-section .offer-card .v2-h2 { font-size: clamp(1.4rem, 2vw, 1.75rem); line-height: 1.1; }
+/* Home: no plain-cream sheets; neighbors never share a color (who slate, offer sage, how rose, meet sage, launch slate) */
+main > .offer { background: var(--tint-sage); }
+main > .how { background: var(--tint-rose); }
+main > .launch-cta { background: var(--tint-slate); }
+/* About: intro on rose above the slate Meet Clay sheet */
+.page-about .intro { background: var(--tint-rose); }
+/* What we offer page */
+.page-offer main > .offer-intro { background: var(--tint-slate); }
+.page-offer main > .offer-cta { background: var(--tint-slate); }
+/* Blog: the page starts on slate instead of cream (posts then fade through the tints as before) */
+.page-post .post { background-color: var(--tint-slate); }

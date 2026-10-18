@@ -128,7 +128,7 @@
   if (post) {
     var root = getComputedStyle(document.documentElement);
     var hex = function (n) { var h = root.getPropertyValue(n).trim().replace('#', ''); return [0, 2, 4].map(function (i) { return parseInt(h.substr(i, 2), 16); }); };
-    var palette = ['--surface', '--tint-rose', '--tint-slate', '--tint-sage'].map(hex);
+    var palette = ['--tint-slate', '--tint-rose', '--tint-sage'].map(hex);
     var heads = Array.prototype.slice.call(post.querySelectorAll('.post-body h2'));
     var tintTicking = false;
     var tint = function () {
