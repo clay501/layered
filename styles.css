@@ -1606,3 +1606,22 @@ main > .meet-teaser {
 }
 /* What we offer page: booking button under the intro copy */
 .offer-intro .offer-intro-btn { display: inline-block; margin-top: 24px; text-decoration: none; }
+/* What we offer page, side by side: the header + copy move down by half the empty space above the button
+   (the free space is split evenly above the header and above the button) */
+@media (min-width: 1200px) {
+  .offer-cta .launch-now .launch-now-title { margin-top: auto; }
+}
+/* Header on phones: the logo never shrinks; when the buttons don't fit beside it (four on the child pages,
+   or very narrow screens) they move to a second row, right-aligned */
+@media (max-width: 720px) {
+  .site-header { flex-wrap: wrap; row-gap: 12px; }
+  .site-header .lockup { flex-shrink: 0; }
+  .site-header .site-nav { margin-left: auto; }
+}
+@media (max-width: 720px) {
+  /* the logo keeps the width it had on phones before (104px) instead of squeezing smaller, so three buttons
+     still share its row at 375px and only four (or very narrow screens) wrap */
+  .site-header .lockup { flex: 0 0 104px; width: 104px; }
+  .site-header .lockup img { width: 100%; height: auto; }
+}
+@media (max-width: 720px) { .site-header { column-gap: 14px; } }
