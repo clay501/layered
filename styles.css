@@ -1370,10 +1370,8 @@ main > .offer { background: var(--surface-raised); }
   object-position: center 18%;
   border-radius: 0;
   box-shadow: none;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='22 26 452 457' preserveAspectRatio='none'%3E%3Cpath d='M471.5 294.9 C460.7 344.1 410.8 394.3 366.1 425.2 C321.4 456.1 252.5 489.8 203.3 480.4 C154.1 470.9 100.9 414.7 71.0 368.6 C41.2 322.6 13.0 252.2 24.1 204.2 C35.2 156.2 92.5 109.8 137.6 80.5 C182.8 51.2 246.0 20.2 294.9 28.5 C343.8 36.8 401.4 85.7 430.8 130.1 C460.3 174.5 482.3 245.7 471.5 294.9 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
-          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='22 26 452 457' preserveAspectRatio='none'%3E%3Cpath d='M471.5 294.9 C460.7 344.1 410.8 394.3 366.1 425.2 C321.4 456.1 252.5 489.8 203.3 480.4 C154.1 470.9 100.9 414.7 71.0 368.6 C41.2 322.6 13.0 252.2 24.1 204.2 C35.2 156.2 92.5 109.8 137.6 80.5 C182.8 51.2 246.0 20.2 294.9 28.5 C343.8 36.8 401.4 85.7 430.8 130.1 C460.3 174.5 482.3 245.7 471.5 294.9 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
 }
-.offer-card:nth-child(2) .offer-blob .offer-photo, .offer-detail-flip .offer-blob .offer-photo {
+.offer-card:nth-child(2) .offer-mask, .offer-detail-flip .offer-mask {
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='40 44 440 452' preserveAspectRatio='none'%3E%3Cpath d='M476.5 337.1 C459.9 384.6 404.4 428.5 356.3 453.8 C308.2 479.2 235.8 504.4 188.1 489.1 C140.4 473.9 94.3 411.6 70.1 362.4 C46.0 313.1 26.4 239.8 43.2 193.5 C59.9 147.1 122.4 107.9 170.7 84.2 C219.0 60.6 285.6 37.4 333.1 51.5 C380.6 65.5 432.0 121.0 455.9 168.6 C479.8 216.2 493.1 289.6 476.5 337.1 Z'/%3E%3C/svg%3E");
           mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='40 44 440 452' preserveAspectRatio='none'%3E%3Cpath d='M476.5 337.1 C459.9 384.6 404.4 428.5 356.3 453.8 C308.2 479.2 235.8 504.4 188.1 489.1 C140.4 473.9 94.3 411.6 70.1 362.4 C46.0 313.1 26.4 239.8 43.2 193.5 C59.9 147.1 122.4 107.9 170.7 84.2 C219.0 60.6 285.6 37.4 333.1 51.5 C380.6 65.5 432.0 121.0 455.9 168.6 C479.8 216.2 493.1 289.6 476.5 337.1 Z'/%3E%3C/svg%3E");
 }
@@ -1402,4 +1400,25 @@ main > .launch-cta { background: var(--tint-slate); }
 /* What we offer: the two cards sit as a centered pair on wider screens */
 @media (min-width: 721px) {
   .offer-grid { grid-template-columns: repeat(2, minmax(0, 460px)); justify-content: center; }
+}
+/* What we offer: centered in the panel both ways. Label, photos, headers, copy and links all
+   sit on each column's center line, so the pair reads as one block in the middle of the sheet. */
+.offer .eyebrow { text-align: center; }
+.offer-card { align-items: center; text-align: center; }
+.offer-card .v2-body { margin-left: auto; margin-right: auto; }
+.offer-grid { align-items: stretch; }
+
+/* The blob mask lives on a wrapper painted in the photo's own background color, so a photo can
+   slide inside its shape (e.g. to keep a head clear of the curve) without exposing an edge */
+.offer-mask {
+  overflow: hidden;
+  background: var(--rose);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='22 26 452 457' preserveAspectRatio='none'%3E%3Cpath d='M471.5 294.9 C460.7 344.1 410.8 394.3 366.1 425.2 C321.4 456.1 252.5 489.8 203.3 480.4 C154.1 470.9 100.9 414.7 71.0 368.6 C41.2 322.6 13.0 252.2 24.1 204.2 C35.2 156.2 92.5 109.8 137.6 80.5 C182.8 51.2 246.0 20.2 294.9 28.5 C343.8 36.8 401.4 85.7 430.8 130.1 C460.3 174.5 482.3 245.7 471.5 294.9 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='22 26 452 457' preserveAspectRatio='none'%3E%3Cpath d='M471.5 294.9 C460.7 344.1 410.8 394.3 366.1 425.2 C321.4 456.1 252.5 489.8 203.3 480.4 C154.1 470.9 100.9 414.7 71.0 368.6 C41.2 322.6 13.0 252.2 24.1 204.2 C35.2 156.2 92.5 109.8 137.6 80.5 C182.8 51.2 246.0 20.2 294.9 28.5 C343.8 36.8 401.4 85.7 430.8 130.1 C460.3 174.5 482.3 245.7 471.5 294.9 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.offer-card:nth-child(2) .offer-mask, .offer-detail-flip .offer-mask { background: var(--sage); }
+/* Relationship photo: the men sit a bit right and slightly lower, so the first man's head clears the curve */
+.offer-card:nth-child(2) .offer-blob .offer-photo, #relationship-therapy .offer-blob .offer-photo {
+  object-position: center 10%;
+  transform: translate(7%, 3%);
 }
