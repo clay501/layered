@@ -112,8 +112,9 @@
       else { var pr = hv.play(); if (pr && pr.catch) pr.catch(function () {}); ht.textContent = 'Pause'; ht.setAttribute('aria-pressed', 'false'); ht.setAttribute('aria-label', 'Pause background video'); }
     };
     ht.addEventListener('click', function () { setHero(!hv.paused); });
-    // keep it looping even where the loop attribute is ignored
-    hv.loop = true;
+    // Loop by restarting on 'ended' instead of the native loop attribute: Safari's native
+    // loop gets stuck seeking back to 0 and freezes the frame, while this restart doesn't.
+    hv.loop = false;
     hv.addEventListener('ended', function () { if (ht.getAttribute('aria-pressed') !== 'true') { hv.currentTime = 0; var pr = hv.play(); if (pr && pr.catch) pr.catch(function () {}); } });
     // if the browser pauses it on its own (some do at the loop point or after a tab switch), start it again
     var resume = function () { if (!reduce && ht.getAttribute('aria-pressed') !== 'true' && hv.paused && !document.hidden) { var pr = hv.play(); if (pr && pr.catch) pr.catch(function () {}); } };
