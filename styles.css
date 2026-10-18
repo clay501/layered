@@ -1399,3 +1399,5 @@ main > .launch-cta { background: var(--tint-slate); }
 .page-offer main > .offer-cta { background: var(--tint-slate); }
 /* Blog: the page starts on slate instead of cream (posts then fade through the tints as before) */
 .page-post .post { background-color: var(--tint-slate); }
+/* What we offer: nudge the Individual Therapy card a little to the left on wider screens */
+@media (min-width: 721px) { .offer-card:nth-child(1) { margin-left: calc(clamp(16px, 2vw, 32px) * -1); } }
