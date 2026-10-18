@@ -1598,3 +1598,9 @@ main > .meet-teaser {
   .hero-buttons .hero-cta { display: flex; align-items: center; justify-content: center; }
   .hero-cta-book { box-shadow: 0 4px 0 0 var(--rose); min-width: 0; }
 }
+/* Hero buttons: one row on desktop in every browser. Safari sizes a shrink-wrapped, wrapping flex row by its
+   widest item, which stacked the two buttons; a non-wrapping row that can't shrink keeps them side by side. */
+@media (min-width: 721px) {
+  .hero-actions { flex-wrap: nowrap; }
+  .hero-buttons { flex-wrap: nowrap; flex: none; }
+}
