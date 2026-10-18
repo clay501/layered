@@ -1399,6 +1399,7 @@ main > .launch-cta { background: var(--tint-slate); }
 .page-offer main > .offer-cta { background: var(--tint-slate); }
 /* Blog: the page starts on slate instead of cream (posts then fade through the tints as before) */
 .page-post .post { background-color: var(--tint-slate); }
-/* What we offer: nudge the Individual Therapy card to the right on wider screens
-   (the same inset the Why copy and the founder photo use) */
-@media (min-width: 721px) { .offer-card:nth-child(1) { margin-left: clamp(24px, 4vw, 72px); } }
+/* What we offer: the two cards sit as a centered pair on wider screens */
+@media (min-width: 721px) {
+  .offer-grid { grid-template-columns: repeat(2, minmax(0, 460px)); justify-content: center; }
+}
