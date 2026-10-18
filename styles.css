@@ -1576,3 +1576,14 @@ main > .meet-teaser {
   .launch-cta { grid-template-areas: "title art" "form form" "now now"; }
   .launch-cta .launch-now { margin-top: 36px; }
 }
+/* Header: vanilla background */
+.site-header { background: #f3e9e6; }
+/* Home launch: the mark centers on the headline + form only; "Don't want to wait" runs full width below,
+   with its copy on two lines */
+@media (min-width: 721px) {
+  .launch-cta { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "copy art" "now now"; }
+  .launch-cta .launch-copy { grid-area: copy; }
+  .launch-cta .launch-art { grid-area: art; align-self: center; }
+  .launch-cta .launch-now { grid-area: now; max-width: none; margin-left: clamp(24px, 4vw, 72px); }
+  .launch-cta .launch-now-copy { max-width: 880px; }
+}
