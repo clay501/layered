@@ -1446,3 +1446,5 @@ main > .launch-cta { background: var(--tint-slate); }
 .offer-card { align-items: flex-start; text-align: left; }
 .offer-card .offer-blob { width: 86.67%; align-self: center; }
 .offer-card .v2-body { margin-left: 0; margin-right: 0; }
+/* Who we serve: on desktop, starts at the same inset from the margin as the Why copy */
+@media (min-width: 721px) { .who .who-top, .who .who-cards { margin-left: clamp(24px, 4vw, 72px); } }
