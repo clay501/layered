@@ -1535,3 +1535,5 @@ main > .meet-teaser {
   .offer-cta .launch-now .launch-now-copy { margin-bottom: 20px; }
 }
 @media (min-width: 900px) { .offer-cta .launch-now { padding-bottom: 52px; } } /* room for the form's status line, so the two buttons line up */
+/* What we offer page: Launching Summer 2027 gets the home page's layered rose shadow */
+.offer-cta .v2-h2 { text-shadow: 0.045em 0.045em 0 var(--rose); }
