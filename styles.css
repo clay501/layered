@@ -1511,3 +1511,27 @@ main > .meet-teaser {
 /* Header: Services button gets the sage edge (About is slate, Contact is rose) */
 .site-nav .nav-services { box-shadow: 0 5px 0 0 var(--sage); }
 @media (max-width: 720px) { .site-nav .nav-services { box-shadow: 0 3px 0 0 var(--sage); } }
+/* "Don't want to wait": booking button */
+.launch-now .launch-now-btn { display: inline-block; margin-top: 20px; text-decoration: none; }
+/* What we offer page: the block is a card as tall as the sign-up form beside it, with its
+   button resting on the bottom edge to line up with the form's own button */
+@media (min-width: 900px) {
+  .page-offer main > .offer-cta { grid-template-rows: auto 1fr; align-items: stretch; }
+  .offer-cta .offer-cta-main { display: contents; }
+  .offer-cta .offer-cta-main > .v2-h2 { grid-column: 1; grid-row: 1; }
+  .offer-cta .offer-cta-main > form.updates { grid-column: 1; grid-row: 2; }
+  .offer-cta .launch-now {
+    grid-column: 2; grid-row: 2;
+    margin-top: 24px; /* same as the form's top margin */
+    padding: 24px 26px 22px;
+    max-width: 520px;
+    display: flex; flex-direction: column; align-items: flex-start;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    box-shadow: 0 6px 0 0 var(--rose);
+  }
+  .offer-cta .launch-now .launch-now-btn { margin-top: auto; }
+  .offer-cta .launch-now .launch-now-copy { margin-bottom: 20px; }
+}
+@media (min-width: 900px) { .offer-cta .launch-now { padding-bottom: 52px; } } /* room for the form's status line, so the two buttons line up */
