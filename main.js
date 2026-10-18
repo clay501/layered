@@ -188,8 +188,9 @@
   var ACCENTS = ['#d4a5a0', '#8a97a8', '#2b2a28']; // rose, slate, ink: the sheet under each tile (sage is the background)
   var BLANK_EDGE = '#ddd5c8';
   var SIZE = 9;       // longest word
-  var HOLD = 2200;    // ms each word stays up
-  var STAGGER = 55, STEP = 70;
+  var SPEED = 1.75;   // playback rate: every timing below is divided by this
+  var HOLD = 2200 / SPEED;    // ms each word stays up
+  var STAGGER = 55 / SPEED, STEP = 70 / SPEED, GAP = 150 / SPEED;
   var ALPHA = 'abcdefghijklmnopqrstuvwxyz';
 
   var board = root.querySelector('.we-are-board');
@@ -225,6 +226,9 @@
 
   function finish() {
     done = true; running = false;
+    // a period flips into the tile right after "layered" once the word has landed
+    var w = WORDS[WORDS.length - 1];
+    later(function () { setTile(w.length, '.', ACCENTS[(WORDS.length - 1) % ACCENTS.length]); }, reduce ? 0 : 350 / SPEED);
     btn.textContent = 'Replay';
     btn.setAttribute('aria-pressed', 'false');
   }
@@ -248,19 +252,20 @@
       later(function () { setTile(i, target, accent); }, end);
       if (end > last) last = end;
     });
-    if (isLast) { later(finish, last + 150); return; }
-    later(advance, last + 150 + HOLD);
+    if (isLast) { later(finish, last + GAP); return; }
+    later(advance, last + GAP + HOLD);
   }
 
   function settle() {
     var k = Math.max(wi, 0), word = WORDS[k], accent = ACCENTS[k % ACCENTS.length];
+    if (done) word += '.';
     tiles.forEach(function (t, i) { setTile(i, word[i] || '', accent); });
   }
 
   function start() {
     if (running || paused || done || !visible) return;
     running = true;
-    later(advance, 300);
+    later(advance, 300 / SPEED);
   }
 
   btn.addEventListener('click', function () {
@@ -288,3 +293,11 @@
     if (document.hidden) { if (wi >= 0) { clearAll(); settle(); } } else if (visible) start();
   });
 })();
+
+// Links into a section of another page (e.g. what-we-offer/#relationship-therapy): the browser's own
+// jump can get lost to smooth scrolling and late layout, so land on the target once the page has loaded
+window.addEventListener('load', function () {
+  var id = decodeURIComponent(location.hash.slice(1));
+  var target = id && document.getElementById(id);
+  if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
+});

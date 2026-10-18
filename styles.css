@@ -1257,8 +1257,8 @@ main > .we-are {
   margin-top: -0.06em;
   color: var(--ink);
 }
-.we-are-glyph.flip-a { animation: weAreFlipA 140ms ease-out; }
-.we-are-glyph.flip-b { animation: weAreFlipB 140ms ease-out; }
+.we-are-glyph.flip-a { animation: weAreFlipA 80ms ease-out; }
+.we-are-glyph.flip-b { animation: weAreFlipB 80ms ease-out; }
 @keyframes weAreFlipA { from { transform: rotateX(-85deg); opacity: .35; } to { transform: none; opacity: 1; } }
 @keyframes weAreFlipB { from { transform: rotateX(-85deg); opacity: .35; } to { transform: none; opacity: 1; } }
 .we-are-toggle {
@@ -1284,4 +1284,76 @@ main > .we-are {
 @media (prefers-reduced-motion: reduce) {
   .we-are-glyph.flip-a, .we-are-glyph.flip-b { animation: none; }
   .we-are-tile { transition: none; }
+}
+
+/* ===================== What we offer (under Who we serve) ===================== */
+main > .offer { background: var(--surface-raised); }
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 5vw, 80px);
+  margin-top: clamp(20px, 2.4vw, 32px);
+}
+.offer-card { display: flex; flex-direction: column; align-items: flex-start; }
+.offer-photo {
+  width: 100%;
+  aspect-ratio: 6 / 5;
+  object-fit: cover;
+  object-position: center 22%;
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 0 0 var(--hairline);
+}
+.offer-card:nth-child(1) .offer-photo { box-shadow: 0 8px 0 0 var(--sage); }
+.offer-card:nth-child(2) .offer-photo { box-shadow: 0 8px 0 0 var(--rose); }
+.offer-card .v2-h2 { margin-top: clamp(28px, 3vw, 40px); max-width: none; }
+.offer-card .v2-body { margin: 16px 0 0; font-size: var(--text-v2); line-height: 1.7; max-width: 52ch; }
+.offer-card .text-link { margin-top: auto; padding-top: 22px; }
+@media (max-width: 720px) {
+  .offer-grid { grid-template-columns: 1fr; gap: 56px; }
+}
+
+/* New headshot is portrait: crop it to a steady frame in the home teaser */
+.meet-teaser .photo-stack img { aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; }
+
+/* About: photo in its own column, as tall as the bio; text sits to its right instead of wrapping */
+@media (min-width: 721px) {
+  .page-about .meet-wrap {
+    display: grid;
+    grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+    column-gap: clamp(44px, 5vw, 72px);
+    align-items: stretch;
+  }
+  .page-about .meet-wrap::after { content: none; }
+  .page-about .meet-wrap .headshot { float: none; width: auto; margin: 0; display: block; }
+  .page-about .meet-wrap .headshot .photo-stack { height: 100%; }
+  .page-about .meet-wrap .headshot .photo-stack img { height: 100%; min-height: 360px; object-fit: cover; object-position: center 25%; }
+}
+.page-about .meet-text > p { margin: 0 0 22px; font-size: var(--text-v2); line-height: 1.75; }
+.page-about .meet-text .button { margin-top: 6px; padding: 11px 20px; font-size: 15px; letter-spacing: 0.02em; text-transform: none; }
+@media (max-width: 720px) {
+  .page-about .meet-text { text-align: left; }
+}
+
+/* ===================== What we offer page ===================== */
+.page-offer main > .offer-intro { background: var(--surface); }
+.page-offer main > .offer-intro .v2-h2 { max-width: 20ch; }
+.page-offer main > .offer-intro .v2-lede { font-size: var(--text-v2); line-height: 1.7; max-width: 62ch; }
+.page-offer main > #individual-therapy { background: var(--tint-rose); }
+.page-offer main > #relationship-therapy { background: var(--tint-sage); }
+.page-offer main > .offer-cta { background: var(--surface-raised); }
+.offer-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+  scroll-margin-top: 80px;
+}
+.offer-detail-flip .offer-photo { order: 2; }
+.offer-detail .offer-photo { box-shadow: 0 8px 0 0 var(--ink); }
+.offer-detail .v2-h2 { max-width: none; }
+.offer-detail .v2-body, .offer-cta .v2-body { margin: 16px 0 0; font-size: var(--text-v2); line-height: 1.7; max-width: 58ch; }
+.offer-cta .button { margin-top: 24px; padding: 11px 20px; font-size: 15px; letter-spacing: 0.02em; }
+@media (max-width: 720px) {
+  .offer-detail { grid-template-columns: 1fr; }
+  .offer-detail-flip .offer-photo { order: 0; }
 }
