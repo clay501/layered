@@ -1508,3 +1508,6 @@ main > .meet-teaser {
 }
 .offer-cta .v2-h2 { max-width: none; }
 @media (min-width: 900px) { .offer-cta .v2-h2 { white-space: nowrap; } }
+/* Header: Services button gets the sage edge (About is slate, Contact is rose) */
+.site-nav .nav-services { box-shadow: 0 5px 0 0 var(--sage); }
+@media (max-width: 720px) { .site-nav .nav-services { box-shadow: 0 3px 0 0 var(--sage); } }
