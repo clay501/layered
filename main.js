@@ -177,3 +177,113 @@
     drift();
   }
 })();
+
+// "We are" flipboard: plays through once and stops on "layered"
+(function () {
+  var root = document.querySelector('.we-are');
+  if (!root) return;
+
+  var WORDS = ['becoming', 'learning', 'healing', 'growing', 'curious', 'exploring', 'evolving', 'seen', 'heard', 'layered'];
+  var ACCENTS = ['#d4a5a0', '#8a97a8', '#2b2a28']; // rose, slate, ink: the sheet under each tile (sage is the background)
+  var BLANK_EDGE = '#ddd5c8';
+  var SIZE = 9;       // longest word
+  var HOLD = 2200;    // ms each word stays up
+  var STAGGER = 55, STEP = 70;
+  var ALPHA = 'abcdefghijklmnopqrstuvwxyz';
+
+  var board = root.querySelector('.we-are-board');
+  var btn = root.querySelector('.we-are-toggle');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var tiles = [];
+  for (var i = 0; i < SIZE; i++) {
+    var tile = document.createElement('span');
+    tile.className = 'we-are-tile is-blank';
+    var glyph = document.createElement('span');
+    glyph.className = 'we-are-glyph';
+    tile.appendChild(glyph);
+    board.appendChild(tile);
+    tiles.push({ el: tile, glyph: glyph, ch: '', n: 0 });
+  }
+
+  var wi = -1, timers = [], paused = false, visible = false, running = false, done = false;
+
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function clearAll() { timers.forEach(clearTimeout); timers = []; running = false; }
+
+  function setTile(i, ch, accent) {
+    var t = tiles[i];
+    if (t.ch === ch) return;
+    t.ch = ch; t.n++;
+    t.glyph.textContent = ch;
+    t.glyph.className = 'we-are-glyph ' + (t.n % 2 ? 'flip-a' : 'flip-b'); // alternating names restarts the animation
+    var blank = ch === '';
+    t.el.classList.toggle('is-blank', blank);
+    t.el.style.boxShadow = '0 6px 0 -1px ' + (blank ? BLANK_EDGE : accent);
+  }
+
+  function finish() {
+    done = true; running = false;
+    btn.textContent = 'Replay';
+    btn.setAttribute('aria-pressed', 'false');
+  }
+
+  function advance() {
+    if (paused || done || !visible) { running = false; return; }
+    if (wi === WORDS.length - 1) { finish(); return; } // already on "layered"
+    running = true;
+    wi++;
+    var isLast = wi === WORDS.length - 1;
+    var word = WORDS[wi], accent = ACCENTS[wi % ACCENTS.length], last = 0;
+    tiles.forEach(function (t, i) {
+      var target = word[i] || '';
+      if (target === t.ch) { if (target) t.el.style.boxShadow = '0 6px 0 -1px ' + accent; return; }
+      var spins = reduce ? 0 : 2 + (i % 3), start = i * STAGGER;
+      for (var s = 0; s < spins; s++) {
+        (function (r, at) { later(function () { setTile(i, r, accent); }, at); })
+          (ALPHA[Math.floor(Math.random() * ALPHA.length)], start + s * STEP);
+      }
+      var end = start + spins * STEP;
+      later(function () { setTile(i, target, accent); }, end);
+      if (end > last) last = end;
+    });
+    if (isLast) { later(finish, last + 150); return; }
+    later(advance, last + 150 + HOLD);
+  }
+
+  function settle() {
+    var k = Math.max(wi, 0), word = WORDS[k], accent = ACCENTS[k % ACCENTS.length];
+    tiles.forEach(function (t, i) { setTile(i, word[i] || '', accent); });
+  }
+
+  function start() {
+    if (running || paused || done || !visible) return;
+    running = true;
+    later(advance, 300);
+  }
+
+  btn.addEventListener('click', function () {
+    if (done) { // Replay from the first word
+      clearAll(); done = false; paused = false; wi = -1;
+      btn.textContent = 'Pause';
+      start();
+      return;
+    }
+    paused = !paused;
+    btn.textContent = paused ? 'Play' : 'Pause';
+    btn.setAttribute('aria-pressed', String(paused));
+    if (paused) { clearAll(); settle(); } else { start(); }
+  });
+
+  // Only runs while the section is on screen and the tab is visible
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+      if (visible) start(); else if (wi >= 0) { clearAll(); settle(); }
+    }, { threshold: 0.25 }).observe(root);
+  } else { visible = true; start(); }
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { if (wi >= 0) { clearAll(); settle(); } } else if (visible) start();
+  });
+})();
