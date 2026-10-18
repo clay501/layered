@@ -1458,3 +1458,5 @@ main > .meet-teaser {
   padding-top: calc(clamp(48px, 6vw, 88px) / 2);
   padding-bottom: calc(clamp(48px, 6vw, 88px) / 2 + var(--sheet-r));
 }
+/* Who we serve: the portrait sits a little left of center in its column on desktop */
+@media (min-width: 721px) { .who-top .who-art { translate: calc(clamp(16px, 2.5vw, 40px) * -1) 0; } }
