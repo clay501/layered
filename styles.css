@@ -1489,3 +1489,22 @@ main > .meet-teaser {
 .offer-detail-copy .text-link + .text-link { margin-top: 12px; }
 /* Sign-up form in the closing section */
 .offer-cta .updates { margin-top: 24px; }
+
+/* ===================== "Don't want to wait until next summer?" ===================== */
+.launch-now { margin-top: 18px; max-width: 600px; }
+.launch-now-title { margin: 0; font-family: var(--font-display); font-weight: 900; font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.2; }
+.launch-now-copy { margin: 10px 0 0; font-size: var(--text-v2); line-height: 1.7; }
+/* Home, phones: the block sits between the title row and the form */
+@media (max-width: 720px) {
+  .launch-cta { grid-template-areas: "title art" "now now" "form form"; }
+  .launch-cta .launch-now { grid-area: now; margin-top: 24px; }
+  .launch-cta form.updates { margin-top: 28px; }
+}
+/* What we offer page: the block sits to the right of the sign-up form */
+.offer-cta .launch-now { margin-top: 32px; }
+@media (min-width: 900px) {
+  .page-offer main > .offer-cta { display: grid; grid-template-columns: minmax(0, 600px) minmax(0, 1fr); column-gap: clamp(40px, 6vw, 96px); align-items: center; }
+  .offer-cta .launch-now { margin-top: 0; padding-top: 56px; max-width: 46ch; }
+}
+.offer-cta .v2-h2 { max-width: none; }
+@media (min-width: 900px) { .offer-cta .v2-h2 { white-space: nowrap; } }
