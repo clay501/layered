@@ -1604,3 +1604,5 @@ main > .meet-teaser {
   .hero-actions { flex-wrap: nowrap; }
   .hero-buttons { flex-wrap: nowrap; flex: none; }
 }
+/* What we offer page: booking button under the intro copy */
+.offer-intro .offer-intro-btn { display: inline-block; margin-top: 24px; text-decoration: none; }
