@@ -1462,8 +1462,8 @@ main > .meet-teaser {
 @media (min-width: 721px) { .who-top .who-art { translate: calc(clamp(16px, 2.5vw, 40px) * -1) 0; } }
 /* What we offer: more room between the two cards on desktop; the label keeps the pair's width */
 @media (min-width: 721px) {
-  .offer-grid { gap: clamp(64px, 10vw, 160px); }
-  .offer .eyebrow { width: min(100%, calc(920px + clamp(64px, 10vw, 160px))); }
+  .offer-grid { gap: clamp(80px, 12vw, 200px); }
+  .offer .eyebrow { width: min(100%, calc(920px + clamp(80px, 12vw, 200px))); }
 }
 
 /* ===================== What we offer page: tighter pass ===================== */
