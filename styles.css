@@ -1910,3 +1910,16 @@ main > [data-layer] .eyebrow { width: fit-content !important; max-width: 100%; }
   .hero-we-are .we-are-line { position: relative; }
   .hero-we-are .we-are-toggle { position: absolute; right: var(--pad); bottom: calc(var(--pad) * 0.7); margin: 0; }
 }
+/* "We are" card: left-aligned and only a little wider than the board */
+.hero-we-are .we-are-line {
+  width: fit-content;
+  max-width: 100%;
+  justify-content: start;
+  padding-right: calc(var(--pad) * 1.8);
+}
+@media (min-width: 721px) {
+  .hero-we-are .we-are-toggle { position: static; }
+}
+@media (max-width: 720px) {
+  .hero-we-are .we-are-line { padding-right: var(--pad); }
+}
