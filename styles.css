@@ -1973,3 +1973,9 @@ main > [data-layer] .eyebrow { width: fit-content !important; max-width: 100%; }
 @media (max-width: 860px) {
   .where-now-grid { grid-template-columns: 1fr; }
 }
+/* Where Clay sees clients now: its own section after What we offer */
+main > .where-now { margin-top: calc(var(--sheet-r) * -1); background: var(--tint-slate); }
+main > .where-now .where-now-head { max-width: 60ch; }
+main > .where-now h2.eyebrow { margin: 0; }
+main > .where-now .where-now-head .v2-body { margin-top: 18px; }
+main > .where-now .loc-card { background: var(--surface-raised); }
