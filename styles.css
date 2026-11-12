@@ -1851,3 +1851,20 @@ main > [data-layer] .eyebrow { width: fit-content !important; max-width: 100%; }
   .hero.hero-video.hero-still { min-height: calc(min(calc(84svh - 66px), 640px) + var(--sheet-r)); }
   .hero.hero-still .hero-bg { object-position: 68% 52%; }
 }
+/* Phones: the photo fills by height, so there's no spare height to crop. Make it a bit taller than the hero and lift it */
+@media (max-width: 720px) {
+  .hero.hero-still .hero-bg { top: -14%; bottom: auto; height: 114%; }
+}
+/* Small phones: keep the header on one line */
+@media (max-width: 400px) {
+  .site-nav { gap: 9px !important; }
+  .site-nav .nav-link { font-size: 11px; }
+  .site-nav .nav-book { padding: 7px 10px; font-size: 11px; }
+  .site-header .lockup img { width: 112px; height: auto; }
+}
+@media (max-width: 720px) {
+  .site-header { flex-wrap: nowrap !important; gap: 10px; }
+  .site-header .site-nav { flex-wrap: nowrap; flex-shrink: 0; margin-left: auto; }
+  .site-header .lockup { flex-shrink: 1; min-width: 0; }
+}
+@media (max-width: 480px) { .site-nav .nav-services { display: none; } }
