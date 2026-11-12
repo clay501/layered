@@ -2005,3 +2005,9 @@ main > .where-now .where-now-head .v2-body {
 .footer-cred dd { margin: 3px 0 0; font-size: 13px; line-height: 18px; color: var(--ink-muted); }
 @media (max-width: 1600px) { .footer-cred-list { grid-template-columns: 1fr; } }
 @media (max-width: 720px) { .footer-creds { grid-template-columns: 1fr; margin-top: 32px; } }
+.loc-inline-link { color: var(--ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.loc-inline-link:hover { text-decoration-color: var(--slate); }
+.next-card-actions { display: flex; flex-wrap: wrap; gap: 12px 14px; }
+.next-card-btn-quiet.next-card-btn-out::after { content: "↗"; transform: none; }
+.next-card-copy .next-card-note { margin-top: 6px; color: var(--ink-muted); font-size: 0.92rem; }
+.next-card-copy .next-card-read { margin-top: 14px; font-size: 0.95rem; }
