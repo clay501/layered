@@ -1195,9 +1195,9 @@ main > .we-are {
 .we-are-wrap { container-type: inline-size; }
 /* --t is one tile's width. "We are" plus nine tiles and their gaps is 14.13 tile-widths wide
    (measured from Unbounded 900), so dividing the row width by 14.2 keeps everything on one
-   line at every width: about 25px tiles on a 390px phone, 50px on a tablet, 78px on desktop. */
+   line at every width: about 25px tiles on a 390px phone, 50px on a tablet, capped at 56px on desktop. */
 .we-are-line {
-  --t: clamp(16px, calc((100vw - 2 * var(--gutter) - 4px) / 14.2), 78px); /* fallback for older browsers */
+  --t: clamp(16px, calc((100vw - 2 * var(--gutter) - 4px) / 14.2), 56px); /* fallback for older browsers */
   display: grid;
   grid-template-columns: auto auto;
   justify-content: start;
@@ -1206,7 +1206,7 @@ main > .we-are {
   margin: 0;
 }
 @supports (width: 1cqi) {
-  .we-are-line { --t: clamp(16px, calc((100cqi - 4px) / 14.2), 78px); }
+  .we-are-line { --t: clamp(16px, calc((100cqi - 4px) / 14.2), 56px); }
 }
 .we-are-lead {
   grid-column: 1; grid-row: 1;
