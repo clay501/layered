@@ -2011,3 +2011,6 @@ main > .where-now .where-now-head .v2-body {
 .next-card-btn-quiet.next-card-btn-out::after { content: "↗"; transform: none; }
 .next-card-copy .next-card-note { margin-top: 6px; color: var(--ink-muted); font-size: 0.92rem; }
 .next-card-copy .next-card-read { margin-top: 14px; font-size: 0.95rem; }
+/* Location cards: more room above the buttons and below them */
+.loc-card { padding-bottom: clamp(32px, 3.8vw, 52px); }
+.loc-actions { padding-top: clamp(32px, 3.2vw, 44px); }
