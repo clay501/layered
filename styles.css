@@ -1869,37 +1869,43 @@ main > [data-layer] .eyebrow { width: fit-content !important; max-width: 100%; }
 }
 @media (max-width: 480px) { .site-nav .nav-services { display: none; } }
 
-/* "We are": a floating sage card on the Why section's color, not a sheet of its own.
-   The We are band takes the rose tint and rounds up over the hero; the Why sheet below
-   continues it without a seam, so the card floats free of both. */
-main > .we-are {
-  background: var(--tint-rose);
-  padding-top: clamp(18px, 2.2vw, 30px);
-  padding-bottom: clamp(6px, 0.8vw, 12px);
-}
-main > .we-are + .why {
-  margin-top: 0;
-  border-radius: 0;
-  box-shadow: none;
-  padding-top: clamp(30px, 3.4vw, 48px);
-}
-.we-are-line {
-  --pad: clamp(16px, 2.2vw, 30px);
-  --t: clamp(14px, calc((100vw - 2 * var(--gutter) - 2 * var(--pad) - 4px) / 14.2), 56px);
-  width: fit-content;
-  max-width: 100%;
-  box-sizing: border-box;
-  padding: calc(var(--pad) * 0.85) var(--pad) calc(var(--pad) * 0.7);
-  border-radius: clamp(16px, 1.8vw, 26px);
-  background: var(--sage);
-  box-shadow: 0 0 0 1px rgba(43, 42, 40, 0.06), 0 6px 0 0 rgba(43, 42, 40, 0.12);
-  row-gap: calc(var(--pad) * 0.35);
-}
-@supports (width: 1cqi) {
-  .we-are-line { --t: clamp(14px, calc((100cqi - 2 * var(--pad) - 4px) / 14.2), 56px); }
-}
 @media (max-width: 380px) {
   .hero-actions .hero-mark { display: none; }
   .hero-buttons { flex-wrap: wrap; row-gap: 14px; }
   .hero-buttons .hero-cta { flex: none; white-space: nowrap; }
+}
+
+/* "We are": its own full-width sage card floating on the bottom of the hero photo,
+   with photo showing below it before the Why sheet rounds up */
+.hero.hero-still { display: flex; flex-direction: column; justify-content: flex-end; }
+.hero.hero-still .hero-copy { padding-bottom: clamp(28px, 3.4vw, 48px); }
+.hero-we-are {
+  position: relative; z-index: 1;
+  margin: 0 var(--gutter);
+  padding-bottom: calc(clamp(36px, 4.6vw, 68px) + var(--sheet-r));
+}
+.hero-we-are .we-are-line {
+  --pad: clamp(16px, 2.2vw, 30px);
+  --t: clamp(14px, calc((100vw - 2 * var(--gutter) - 2 * var(--pad) - 4px) / 14.2), 56px);
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  padding: calc(var(--pad) * 0.9) var(--pad) calc(var(--pad) * 0.75);
+  border-radius: clamp(18px, 2vw, 28px);
+  background: var(--sage);
+  color: var(--ink);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.45), 0 6px 0 0 rgba(43, 42, 40, 0.18);
+  row-gap: calc(var(--pad) * 0.3);
+}
+@supports (width: 1cqi) {
+  .hero-we-are .we-are-line { --t: clamp(14px, calc((100cqi - 2 * var(--pad) - 4px) / 14.2), 56px); }
+}
+@media (max-width: 720px) {
+  .hero.hero-still .hero-copy { padding-bottom: 24px; }
+}
+/* the hero grows by the card's height so the photo above it keeps its size */
+@media (min-width: 721px) { .hero.hero-video.hero-still { min-height: calc(clamp(620px, 94svh, 940px) + var(--sheet-r)); } }
+@media (min-width: 721px) {
+  .hero-we-are .we-are-line { position: relative; }
+  .hero-we-are .we-are-toggle { position: absolute; right: var(--pad); bottom: calc(var(--pad) * 0.7); margin: 0; }
 }
