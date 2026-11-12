@@ -1936,3 +1936,8 @@ main > [data-layer] .eyebrow { width: fit-content !important; max-width: 100%; }
 @media (min-width: 721px) {
   .hero-we-are { padding-bottom: calc(clamp(18px, 2.2vw, 34px) + var(--sheet-r)); }
 }
+/* Phones: a taller hero so the text block sits below her face, not across it */
+@media (max-width: 720px) {
+  .hero.hero-video.hero-still { min-height: calc(max(min(calc(100svh - 40px), 820px), 640px) + var(--sheet-r)); }
+  .hero-we-are { padding-bottom: calc(22px + var(--sheet-r)); }
+}
