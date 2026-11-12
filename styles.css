@@ -1979,3 +1979,7 @@ main > .where-now .where-now-head { max-width: 60ch; }
 main > .where-now h2.eyebrow { margin: 0; }
 main > .where-now .where-now-head .v2-body { margin-top: 18px; }
 main > .where-now .loc-card { background: var(--surface-raised); }
+@media (min-width: 1000px) {
+  main > .where-now .where-now-head { max-width: none; }
+  main > .where-now .where-now-head .v2-body { max-width: none; white-space: nowrap; }
+}
