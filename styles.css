@@ -1892,7 +1892,8 @@ main > [data-layer] .eyebrow { width: fit-content !important; max-width: 100%; }
   justify-content: center;
   padding: calc(var(--pad) * 0.9) var(--pad) calc(var(--pad) * 0.75);
   border-radius: clamp(18px, 2vw, 28px);
-  background: var(--sage);
+  background: rgba(147, 163, 130, 0.75); /* --sage at 75% */
+  background: color-mix(in srgb, var(--sage) 75%, transparent);
   color: var(--ink);
   box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.45), 0 6px 0 0 rgba(43, 42, 40, 0.18);
   row-gap: calc(var(--pad) * 0.3);
