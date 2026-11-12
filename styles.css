@@ -2007,3 +2007,5 @@ main > .where-now .where-now-head .v2-body {
 @media (max-width: 720px) { .footer-creds { grid-template-columns: 1fr; margin-top: 32px; } }
 .loc-inline-link { color: var(--ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 .loc-inline-link:hover { text-decoration-color: var(--slate); }
+.next-card-actions { display: flex; flex-wrap: wrap; gap: 12px 14px; }
+.next-card-btn-quiet.next-card-btn-out::after { content: "↗"; transform: none; }
