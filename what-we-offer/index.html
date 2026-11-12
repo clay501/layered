@@ -10,13 +10,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800;900&family=Unbounded:wght@900&display=swap">
-<link rel="stylesheet" href="../styles.css?v=v4-7">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="../styles.css?v=v4-8">
 </head>
 <body class="page-offer">
 <header class="site-header" data-sticky>
   <a class="lockup" href="../index.html" aria-label="Layered Health Psychotherapy, home"><img src="../assets/layered-health-lockup-expressive.svg?v=3" alt="" width="176" height="44"></a>
   <nav class="site-nav" aria-label="Main">
-    <a class="nav-btn nav-secondary nav-home" href="../index.html">Home</a>
+    <a class="nav-link nav-home" href="../index.html">Home</a>
     <a class="nav-link" href="../about.html">About</a>
     <a class="nav-link" href="https://www.psychologytoday.com/us/therapists/clay-klaus-wade-glenolden-pa/1806016" target="_blank" rel="noopener noreferrer">Contact</a>
     <a class="nav-btn nav-book" href="https://sunflowerradiance.janeapp.com/#/staff_member/15" target="_blank" rel="noopener noreferrer">Book a consult<span class="sr-only"> (opens in a new tab)</span></a>
@@ -53,38 +54,49 @@
     </div>
   </section>
 
-  <section class="v2-section offer-cta" data-reveal>
-    <div class="offer-cta-main">
-    <h2 class="v2-h2">Launching Summer 2027</h2>
-      <form id="keep-updated" class="updates" action="https://formspree.io/f/xqpeldrg" method="POST" data-endpoint="https://formspree.io/f/xqpeldrg" novalidate>
-        <input type="hidden" name="_subject" value="New Layered Health sign-up">
-        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
-        <h3 class="updates-title">Keep me updated</h3>
-        <p class="updates-note">Join our mailing list to stay updated as we lead up to our launch. Please don't share anything about your health here.</p>
-        <div class="updates-grid">
-          <label class="field"><span>Full name</span><input name="name" type="text" autocomplete="name" required></label>
-          <label class="field"><span>Pronouns <em>(optional)</em></span><input name="pronouns" type="text" autocomplete="off" placeholder="e.g. she/her, they/them"></label>
-          <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" required></label>
-          <label class="field"><span>Phone <em>(optional)</em></span><input name="phone" type="tel" autocomplete="tel"></label>
-          <label class="field"><span>State</span>
-            <select name="state" autocomplete="address-level1">
-              <option value="PA" selected>Pennsylvania</option>
-              <option value="NJ">New Jersey</option>
-              <option value="DE">Delaware</option>
-              <option value="MD">Maryland</option>
-              <option value="DC">Washington, DC</option>
-              <option value="Other">Other</option>
-            </select>
-          </label>
-          <div class="field field-submit"><button class="button button-sm" type="submit">Keep me updated</button></div>
+  <section id="stay-in-touch" data-layer="slate" class="v2-section launch-cta launch-cards">
+    <p class="eyebrow">Stay in touch</p>
+    <div class="next-cards">
+      <div class="next-card next-card-launch" data-reveal>
+        <div class="next-card-copy">
+          <h2 class="next-card-title">Launching Summer 2027</h2>
+          <p>Join our mailing list to stay updated as we lead up to our launch.</p>
         </div>
-        <p class="updates-status" role="status" aria-live="polite"></p>
-      </form>
+        <a class="next-card-btn next-card-btn-quiet" href="#keep-updated" data-form-toggle aria-controls="updates-panel">Keep me updated</a>
+      </div>
+      <div class="next-card next-card-now" data-reveal>
+        <div class="next-card-copy">
+          <h2 class="next-card-title">Don't want to wait until next summer?</h2>
+          <p>Clay currently sees clients as an intern therapist at Sunflower Radiance Counseling, supervised by Shannon Kilroy, LPC. He sees clients virtually throughout PA, and in person at SRC's office in Glenolden.</p>
+        </div>
+        <a class="next-card-btn" href="https://sunflowerradiance.janeapp.com/#/staff_member/15" target="_blank" rel="noopener noreferrer">Book a free consultation<span class="sr-only"> (opens in a new tab)</span></a>
+      </div>
     </div>
-    <div class="launch-now">
-      <h3 class="launch-now-title">Don't want to wait until next summer?</h3>
-      <p class="launch-now-copy">Clay currently sees clients as an intern therapist at Sunflower Radiance Counseling, supervised by Shannon Kilroy, LPC. He sees clients virtually throughout PA, and in person at SRC's office in Glenolden.</p>
-      <a class="button button-sm launch-now-btn" href="https://sunflowerradiance.janeapp.com/#/staff_member/15" target="_blank" rel="noopener noreferrer">Book a free consultation with Clay</a>
+    <div class="updates-panel" id="updates-panel">
+        <form id="keep-updated" class="updates" action="https://formspree.io/f/xqpeldrg" method="POST" data-endpoint="https://formspree.io/f/xqpeldrg" novalidate>
+          <input type="hidden" name="_subject" value="New Layered Health sign-up">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+          <h3 class="updates-title">Keep me updated</h3>
+          <p class="updates-note">Please don't share anything about your health here.</p>
+          <div class="updates-grid">
+            <label class="field"><span>Full name</span><input name="name" type="text" autocomplete="name" required></label>
+            <label class="field"><span>Pronouns <em>(optional)</em></span><input name="pronouns" type="text" autocomplete="off" placeholder="e.g. she/her, they/them"></label>
+            <label class="field"><span>Email</span><input name="email" type="email" autocomplete="email" required></label>
+            <label class="field"><span>Phone <em>(optional)</em></span><input name="phone" type="tel" autocomplete="tel"></label>
+            <label class="field"><span>State</span>
+              <select name="state" autocomplete="address-level1">
+                <option value="PA" selected>Pennsylvania</option>
+                <option value="NJ">New Jersey</option>
+                <option value="DE">Delaware</option>
+                <option value="MD">Maryland</option>
+                <option value="DC">Washington, DC</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+            <div class="field field-submit"><button class="button button-sm" type="submit">Keep me updated</button></div>
+          </div>
+          <p class="updates-status" role="status" aria-live="polite"></p>
+        </form>
     </div>
   </section>
 </main>
