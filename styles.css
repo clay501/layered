@@ -1892,7 +1892,8 @@ main > [data-layer] .eyebrow { width: fit-content !important; max-width: 100%; }
   justify-content: center;
   padding: calc(var(--pad) * 0.9) var(--pad) calc(var(--pad) * 0.75);
   border-radius: clamp(18px, 2vw, 28px);
-  background: var(--sage);
+  background: rgba(147, 163, 130, 0.75); /* --sage at 75% */
+  background: color-mix(in srgb, var(--sage) 75%, transparent);
   color: var(--ink);
   box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.45), 0 6px 0 0 rgba(43, 42, 40, 0.18);
   row-gap: calc(var(--pad) * 0.3);
@@ -1908,4 +1909,35 @@ main > [data-layer] .eyebrow { width: fit-content !important; max-width: 100%; }
 @media (min-width: 721px) {
   .hero-we-are .we-are-line { position: relative; }
   .hero-we-are .we-are-toggle { position: absolute; right: var(--pad); bottom: calc(var(--pad) * 0.7); margin: 0; }
+}
+/* "We are" card: left-aligned and only a little wider than the board */
+.hero-we-are .we-are-line {
+  width: fit-content;
+  max-width: 100%;
+  justify-content: start;
+  padding-right: calc(var(--pad) * 1.8);
+}
+@media (min-width: 721px) {
+  .hero-we-are .we-are-toggle { position: static; }
+}
+@media (max-width: 720px) {
+  .hero-we-are .we-are-line { padding-right: var(--pad); }
+}
+/* "We are" without a card: floating directly on the hero photo, in the headline's cream */
+.hero-we-are .we-are-line {
+  background: none;
+  box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+.hero-we-are .we-are-lead { color: var(--surface); text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45); }
+.hero-we-are .we-are-toggle, .hero-we-are .we-are-toggle:hover { color: var(--surface); }
+.hero-we-are .we-are-tile { box-shadow: 0 6px 0 -1px rgba(212, 165, 160, 0.9), 0 10px 24px -10px rgba(0, 0, 0, 0.5); }
+@media (min-width: 721px) {
+  .hero-we-are { padding-bottom: calc(clamp(18px, 2.2vw, 34px) + var(--sheet-r)); }
+}
+/* Phones: a taller hero so the text block sits below her face, not across it */
+@media (max-width: 720px) {
+  .hero.hero-video.hero-still { min-height: calc(max(min(calc(100svh - 40px), 820px), 640px) + var(--sheet-r)); }
+  .hero-we-are { padding-bottom: calc(22px + var(--sheet-r)); }
 }
