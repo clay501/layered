@@ -1189,15 +1189,15 @@ svg.launch-art { aspect-ratio: 908 / 797.6; overflow: visible; }
 main > .we-are {
   background: var(--sage);
   color: var(--on-color);
-  padding-top: clamp(40px, 4.9vw, 70px);
-  padding-bottom: calc(clamp(32px, 4.2vw, 60px) + var(--sheet-r));
+  padding-top: clamp(30px, 3.6vw, 50px);
+  padding-bottom: calc(clamp(24px, 3vw, 42px) + var(--sheet-r));
 }
 .we-are-wrap { container-type: inline-size; }
 /* --t is one tile's width. "We are" plus nine tiles and their gaps is 14.13 tile-widths wide
    (measured from Unbounded 900), so dividing the row width by 14.2 keeps everything on one
-   line at every width: about 25px tiles on a 390px phone, 50px on a tablet, 78px on desktop. */
+   line at every width: about 25px tiles on a 390px phone, 50px on a tablet, capped at 56px on desktop. */
 .we-are-line {
-  --t: clamp(16px, calc((100vw - 2 * var(--gutter) - 4px) / 14.2), 78px); /* fallback for older browsers */
+  --t: clamp(16px, calc((100vw - 2 * var(--gutter) - 4px) / 14.2), 56px); /* fallback for older browsers */
   display: grid;
   grid-template-columns: auto auto;
   justify-content: start;
@@ -1206,7 +1206,7 @@ main > .we-are {
   margin: 0;
 }
 @supports (width: 1cqi) {
-  .we-are-line { --t: clamp(16px, calc((100cqi - 4px) / 14.2), 78px); }
+  .we-are-line { --t: clamp(16px, calc((100cqi - 4px) / 14.2), 56px); }
 }
 .we-are-lead {
   grid-column: 1; grid-row: 1;
@@ -1868,3 +1868,44 @@ main > [data-layer] .eyebrow { width: fit-content !important; max-width: 100%; }
   .site-header .lockup { flex-shrink: 1; min-width: 0; }
 }
 @media (max-width: 480px) { .site-nav .nav-services { display: none; } }
+
+@media (max-width: 380px) {
+  .hero-actions .hero-mark { display: none; }
+  .hero-buttons { flex-wrap: wrap; row-gap: 14px; }
+  .hero-buttons .hero-cta { flex: none; white-space: nowrap; }
+}
+
+/* "We are": its own full-width sage card floating on the bottom of the hero photo,
+   with photo showing below it before the Why sheet rounds up */
+.hero.hero-still { display: flex; flex-direction: column; justify-content: flex-end; }
+.hero.hero-still .hero-copy { padding-bottom: clamp(28px, 3.4vw, 48px); }
+.hero-we-are {
+  position: relative; z-index: 1;
+  margin: 0 var(--gutter);
+  padding-bottom: calc(clamp(36px, 4.6vw, 68px) + var(--sheet-r));
+}
+.hero-we-are .we-are-line {
+  --pad: clamp(16px, 2.2vw, 30px);
+  --t: clamp(14px, calc((100vw - 2 * var(--gutter) - 2 * var(--pad) - 4px) / 14.2), 56px);
+  width: 100%;
+  box-sizing: border-box;
+  justify-content: center;
+  padding: calc(var(--pad) * 0.9) var(--pad) calc(var(--pad) * 0.75);
+  border-radius: clamp(18px, 2vw, 28px);
+  background: var(--sage);
+  color: var(--ink);
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.45), 0 6px 0 0 rgba(43, 42, 40, 0.18);
+  row-gap: calc(var(--pad) * 0.3);
+}
+@supports (width: 1cqi) {
+  .hero-we-are .we-are-line { --t: clamp(14px, calc((100cqi - 2 * var(--pad) - 4px) / 14.2), 56px); }
+}
+@media (max-width: 720px) {
+  .hero.hero-still .hero-copy { padding-bottom: 24px; }
+}
+/* the hero grows by the card's height so the photo above it keeps its size */
+@media (min-width: 721px) { .hero.hero-video.hero-still { min-height: calc(clamp(620px, 94svh, 940px) + var(--sheet-r)); } }
+@media (min-width: 721px) {
+  .hero-we-are .we-are-line { position: relative; }
+  .hero-we-are .we-are-toggle { position: absolute; right: var(--pad); bottom: calc(var(--pad) * 0.7); margin: 0; }
+}
