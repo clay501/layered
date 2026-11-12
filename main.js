@@ -326,3 +326,115 @@ window.addEventListener('load', function () {
   window.addEventListener('load', fit);
   fit();
 })();
+
+/* ===================== v4: process tabs, layer rail, sign-up card ===================== */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Process tabs: Explore / Discern / Integrate change one illustration and one caption
+  var proc = document.querySelector('[data-process]');
+  if (proc) {
+    var list = proc.querySelector('.process-tabs');
+    var tabs = Array.prototype.slice.call(proc.querySelectorAll('.process-tab'));
+    var panels = Array.prototype.slice.call(proc.querySelectorAll('.process-panel'));
+    list.setAttribute('role', 'tablist');
+    tabs.forEach(function (t, i) {
+      t.setAttribute('role', 'tab');
+      t.setAttribute('aria-controls', panels[i].id);
+      panels[i].setAttribute('role', 'tabpanel');
+      panels[i].setAttribute('aria-labelledby', t.id);
+      panels[i].setAttribute('tabindex', '0');
+    });
+    var select = function (i, focus) {
+      tabs.forEach(function (t, j) {
+        var on = i === j;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        panels[j].hidden = !on;
+      });
+      proc.setAttribute('data-step', String(i + 1));
+      if (focus) tabs[i].focus();
+    };
+    tabs.forEach(function (t, i) {
+      t.addEventListener('click', function () { select(i, false); });
+      t.addEventListener('keydown', function (e) {
+        var k = e.key, n = tabs.length, to = null;
+        if (k === 'ArrowRight' || k === 'ArrowDown') to = (i + 1) % n;
+        else if (k === 'ArrowLeft' || k === 'ArrowUp') to = (i - 1 + n) % n;
+        else if (k === 'Home') to = 0;
+        else if (k === 'End') to = n - 1;
+        if (to !== null) { e.preventDefault(); select(to, true); }
+      });
+    });
+    select(0, false);
+  }
+
+  // "Keep me updated" card opens the sign-up form under the two cards
+  var panel = document.getElementById('updates-panel');
+  var toggles = Array.prototype.slice.call(document.querySelectorAll('[data-form-toggle]'));
+  if (panel && toggles.length) {
+    var setOpen = function (open) {
+      panel.hidden = !open;
+      toggles.forEach(function (b) { b.setAttribute('aria-expanded', open ? 'true' : 'false'); });
+    };
+    setOpen(location.hash === '#keep-updated');
+    toggles.forEach(function (b) {
+      b.setAttribute('role', 'button');
+      b.addEventListener('click', function (e) {
+        e.preventDefault();
+        var open = panel.hidden;
+        setOpen(open);
+        if (open) { var f = panel.querySelector('input:not([type=hidden]):not(.hp)'); if (f) f.focus({ preventScroll: true }); panel.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' }); }
+      });
+    });
+    // any other link to #keep-updated (the hero button) opens it too
+    document.querySelectorAll('a[href="#keep-updated"]:not([data-form-toggle])').forEach(function (a) {
+      a.addEventListener('click', function () { setOpen(true); });
+    });
+    window.addEventListener('hashchange', function () { if (location.hash === '#keep-updated') setOpen(true); });
+  }
+
+  // Layer rail: one segment per section, each filling in its own color as you read through it
+  var rail = document.querySelector('.layer-rail');
+  var secs = Array.prototype.slice.call(document.querySelectorAll('main > [data-layer]'));
+  var hero = document.querySelector('.hero');
+  if (rail && secs.length) {
+    var track = rail.querySelector('.layer-rail-track');
+    var mark = rail.querySelector('.layer-rail-mark');
+    var fills = secs.map(function (s) {
+      var seg = document.createElement('span');
+      seg.className = 'layer-rail-seg';
+      seg.style.setProperty('--c', 'var(--' + s.getAttribute('data-layer') + ')');
+      var f = document.createElement('i');
+      seg.appendChild(f); track.appendChild(seg);
+      return f;
+    });
+    var queued = false;
+    var draw = function () {
+      queued = false;
+      if (!rail.offsetParent && getComputedStyle(rail).display === 'none') return;
+      var vh = window.innerHeight, probe = vh * 0.45;
+      var h = hero ? hero.getBoundingClientRect() : null;
+      rail.classList.toggle('is-on', !h || h.bottom < vh * 0.5);
+      var segs = track.children, done = 0;
+      secs.forEach(function (s, i) {
+        var r = s.getBoundingClientRect();
+        var p = Math.max(0, Math.min(1, (probe - r.top) / r.height));
+        fills[i].style.height = (p * 100).toFixed(2) + '%';
+        if (p > 0) done = i + p;
+      });
+      // mark rides at the leading edge of the fill
+      var idx = Math.min(Math.floor(done), secs.length - 1), frac = done - idx;
+      var seg = segs[idx];
+      if (seg) {
+        var y = seg.offsetTop + (done >= secs.length ? seg.offsetHeight : seg.offsetHeight * frac);
+        mark.style.transform = 'translateY(' + y.toFixed(1) + 'px)';
+      }
+    };
+    var ask = function () { if (!queued) { queued = true; window.requestAnimationFrame(draw); } };
+    window.addEventListener('scroll', ask, { passive: true });
+    window.addEventListener('resize', ask);
+    window.addEventListener('load', ask);
+    draw();
+  }
+})();
