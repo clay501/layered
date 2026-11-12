@@ -2009,3 +2009,5 @@ main > .where-now .where-now-head .v2-body {
 .loc-inline-link:hover { text-decoration-color: var(--slate); }
 .next-card-actions { display: flex; flex-wrap: wrap; gap: 12px 14px; }
 .next-card-btn-quiet.next-card-btn-out::after { content: "↗"; transform: none; }
+.next-card-copy .next-card-note { margin-top: 6px; color: var(--ink-muted); font-size: 0.92rem; }
+.next-card-copy .next-card-read { margin-top: 14px; font-size: 0.95rem; }
