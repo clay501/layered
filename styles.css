@@ -1846,8 +1846,8 @@ main > [data-layer] .eyebrow { width: fit-content !important; max-width: 100%; }
 .offer .eyebrow { margin-left: auto; margin-right: auto; }
 /* Hero photo: shorter, with less sky at the top */
 .hero.hero-video.hero-still { min-height: calc(clamp(460px, 74svh, 720px) + var(--sheet-r)); }
-.hero.hero-still .hero-bg { object-position: 64% 62%; }
+.hero.hero-still .hero-bg { object-position: 64% 74%; }
 @media (max-width: 720px) {
   .hero.hero-video.hero-still { min-height: calc(min(calc(84svh - 66px), 640px) + var(--sheet-r)); }
-  .hero.hero-still .hero-bg { object-position: 68% 40%; }
+  .hero.hero-still .hero-bg { object-position: 68% 52%; }
 }
