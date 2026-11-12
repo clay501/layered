@@ -2005,3 +2005,5 @@ main > .where-now .where-now-head .v2-body {
 .footer-cred dd { margin: 3px 0 0; font-size: 13px; line-height: 18px; color: var(--ink-muted); }
 @media (max-width: 1600px) { .footer-cred-list { grid-template-columns: 1fr; } }
 @media (max-width: 720px) { .footer-creds { grid-template-columns: 1fr; margin-top: 32px; } }
+.loc-inline-link { color: var(--ink); font-weight: 700; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.loc-inline-link:hover { text-decoration-color: var(--slate); }
