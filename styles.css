@@ -1189,8 +1189,8 @@ svg.launch-art { aspect-ratio: 908 / 797.6; overflow: visible; }
 main > .we-are {
   background: var(--sage);
   color: var(--on-color);
-  padding-top: clamp(40px, 4.9vw, 70px);
-  padding-bottom: calc(clamp(32px, 4.2vw, 60px) + var(--sheet-r));
+  padding-top: clamp(30px, 3.6vw, 50px);
+  padding-bottom: calc(clamp(24px, 3vw, 42px) + var(--sheet-r));
 }
 .we-are-wrap { container-type: inline-size; }
 /* --t is one tile's width. "We are" plus nine tiles and their gaps is 14.13 tile-widths wide
