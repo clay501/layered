@@ -1991,3 +1991,17 @@ main > .where-now .where-now-head .v2-body {
   line-height: 1.25;
   color: var(--ink);
 }
+
+/* Footer: licensure and clinical supervision, replacing the one-line supervision note */
+.footer-creds {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px clamp(24px, 4vw, 64px);
+  margin-top: 32px; padding-top: 24px;
+  border-top: 1px solid var(--hairline);
+}
+.footer-cred-group .footer-label { margin: 0 0 12px; }
+.footer-cred-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; margin: 0; }
+.footer-cred dt { font-weight: 800; font-size: 13px; line-height: 18px; letter-spacing: 0.02em; color: var(--ink); }
+.footer-cred dd { margin: 3px 0 0; font-size: 13px; line-height: 18px; color: var(--ink-muted); }
+@media (max-width: 1600px) { .footer-cred-list { grid-template-columns: 1fr; } }
+@media (max-width: 720px) { .footer-creds { grid-template-columns: 1fr; margin-top: 32px; } }
