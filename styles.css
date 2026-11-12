@@ -1923,3 +1923,16 @@ main > [data-layer] .eyebrow { width: fit-content !important; max-width: 100%; }
 @media (max-width: 720px) {
   .hero-we-are .we-are-line { padding-right: var(--pad); }
 }
+/* "We are" without a card: floating directly on the hero photo, in the headline's cream */
+.hero-we-are .we-are-line {
+  background: none;
+  box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+.hero-we-are .we-are-lead { color: var(--surface); text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45); }
+.hero-we-are .we-are-toggle, .hero-we-are .we-are-toggle:hover { color: var(--surface); }
+.hero-we-are .we-are-tile { box-shadow: 0 6px 0 -1px rgba(212, 165, 160, 0.9), 0 10px 24px -10px rgba(0, 0, 0, 0.5); }
+@media (min-width: 721px) {
+  .hero-we-are { padding-bottom: calc(clamp(18px, 2.2vw, 34px) + var(--sheet-r)); }
+}
