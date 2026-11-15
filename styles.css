@@ -2059,3 +2059,4 @@ main > .where-now .where-now-head .v2-body {
 .next-card-btn.next-card-btn-mail::after { content: "→"; transform: none; }
 @media (max-width: 480px) { .next-card-actions .next-card-btn { white-space: normal; } }
 @media (max-width: 720px) { .hero-buttons .hero-cta { white-space: nowrap; } }
+.next-card-btn.next-card-btn-out:not(.next-card-btn-quiet)::after { content: "↗"; transform: none; }
