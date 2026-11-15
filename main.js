@@ -438,3 +438,20 @@ window.addEventListener('load', function () {
     draw();
   }
 })();
+
+/* Phone header menu: About / Services / Contact fold into a menu beside "Book a consult" */
+(function () {
+  var btn = document.querySelector('.nav-toggle');
+  var menu = document.getElementById('nav-menu');
+  if (!btn || !menu) return;
+  var set = function (open) {
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
+    menu.classList.toggle('is-open', open);
+  };
+  btn.addEventListener('click', function (e) { e.stopPropagation(); set(!menu.classList.contains('is-open')); });
+  document.addEventListener('click', function (e) { if (menu.classList.contains('is-open') && !menu.contains(e.target)) set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('is-open')) { set(false); btn.focus(); } });
+  menu.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+  window.addEventListener('resize', function () { if (window.innerWidth > 720) set(false); });
+})();

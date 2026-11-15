@@ -20,7 +20,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,800;0,900;1,400&family=Unbounded:wght@900&display=swap">
-<link rel="stylesheet" href="../../styles.css?v=v4-15">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="../../styles.css?v=v4-17">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -113,11 +114,14 @@
 <header class="site-header" data-sticky>
   <a class="lockup" href="../../index.html" aria-label="Layered Health Psychotherapy, home"><img src="../../assets/layered-health-lockup-expressive.svg?v=3" alt="" width="176" height="44"></a>
   <nav class="site-nav" aria-label="Main">
-    <a class="nav-link nav-home" href="../../index.html">Home</a>
-    <a class="nav-link" href="../../about.html">About</a>
-    <a class="nav-link nav-services" href="../../what-we-offer/">Services</a>
-    <a class="nav-link" href="https://www.psychologytoday.com/us/therapists/clay-klaus-wade-glenolden-pa/1806016" target="_blank" rel="noopener noreferrer">Contact</a>
+    <div class="nav-links" id="nav-menu">
+      <a class="nav-link nav-home" href="../../index.html">Home</a>
+      <a class="nav-link" href="../../about.html">About</a>
+      <a class="nav-link nav-services" href="../../what-we-offer/">Services</a>
+      <a class="nav-link" href="https://www.psychologytoday.com/us/therapists/clay-klaus-wade-glenolden-pa/1806016" target="_blank" rel="noopener noreferrer">Contact</a>
+    </div>
     <a class="nav-btn nav-book" href="https://www.psychologytoday.com/us/therapists/clay-klaus-wade-glenolden-pa/1806016" target="_blank" rel="noopener noreferrer">Book a consult<span class="sr-only"> (opens in a new tab)</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
 </header>
 
@@ -223,6 +227,6 @@
     </div>
   </div>
 </footer>
-<script src="../../main.js?v=v4-1" defer></script>
+<script src="../../main.js?v=v4-2" defer></script>
 </body>
 </html>
