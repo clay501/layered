@@ -2014,3 +2014,48 @@ main > .where-now .where-now-head .v2-body {
 /* Location cards: more room above the buttons and below them */
 .loc-card { padding-bottom: clamp(32px, 3.8vw, 52px); }
 .loc-actions { padding-top: clamp(32px, 3.2vw, 44px); }
+
+/* ---------- Header: desktop links inline; on phones they fold into a menu next to "Book a consult" ---------- */
+.site-nav .nav-links { display: flex; align-items: center; gap: inherit; }
+.nav-toggle { display: none; }
+.lg-only { display: inline; }
+@media (max-width: 720px) {
+  .lg-only { display: none; }
+  .site-header { position: sticky; }
+  .js .site-nav .nav-toggle {
+    display: inline-flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px;
+    width: 42px; height: 38px; padding: 0; margin: 0;
+    border: 2px solid var(--ink); border-radius: var(--radius-pill);
+    background: var(--surface); cursor: pointer;
+  }
+  .nav-toggle span { display: block; width: 18px; height: 3px; border-radius: 3px; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .nav-toggle span:nth-child(1) { background: var(--slate); }
+  .nav-toggle span:nth-child(2) { background: var(--rose); }
+  .nav-toggle span:nth-child(3) { background: var(--sage); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--ink); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--ink); }
+  .nav-toggle:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+  .js .site-nav .nav-links {
+    display: none;
+    position: absolute; z-index: 60; top: calc(100% + 8px); left: var(--gutter); right: var(--gutter);
+    flex-direction: column; align-items: stretch; gap: 0;
+    padding: 8px 18px;
+    border-radius: var(--radius-md);
+    background: var(--surface-raised);
+    box-shadow: 0 0 0 1px var(--hairline), 0 6px 0 0 var(--rose), 0 18px 36px -18px rgba(0, 0, 0, 0.35);
+  }
+  .js .site-nav .nav-links.is-open { display: flex; }
+  .js .site-nav .nav-links .nav-link,
+  .js .site-nav .nav-links .nav-link.nav-services,
+  .js .site-nav .nav-links .nav-link.nav-home { display: block !important; padding: 14px 2px; font-size: 16px; border-bottom: 1px solid var(--hairline); background-image: none; }
+  .js .site-nav .nav-links .nav-link:last-child { border-bottom: 0; }
+  .js .site-nav { gap: 10px !important; }
+  .js .site-nav .nav-book { font-size: 13px; padding: 9px 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .nav-toggle span { transition: none; } }
+
+/* "Don't want to wait" card: both booking buttons share the black-and-rose style */
+.next-card-btn.next-card-btn-mail::after { content: "→"; transform: none; }
+@media (max-width: 480px) { .next-card-actions .next-card-btn { white-space: normal; } }
+@media (max-width: 720px) { .hero-buttons .hero-cta { white-space: nowrap; } }

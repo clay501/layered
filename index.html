@@ -11,16 +11,19 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800;900&family=Unbounded:wght@900&display=swap">
 <link rel="preload" as="image" href="assets/hero-canyon-1280.webp" type="image/webp" imagesrcset="assets/hero-canyon-1280.webp 1280w, assets/hero-canyon.webp 2400w" imagesizes="100vw">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="styles.css?v=v4-15">
+<link rel="stylesheet" href="styles.css?v=v4-16">
 </head>
 <body>
 <header class="site-header" data-sticky>
   <a class="lockup" href="./index.html" aria-label="Layered Health Psychotherapy, home"><img src="assets/layered-health-lockup-expressive.svg?v=3" alt="" width="176" height="44"></a>
   <nav class="site-nav" aria-label="Main">
-    <a class="nav-link" href="./about.html">About</a>
-    <a class="nav-link nav-services" href="./what-we-offer/">Services</a>
-    <a class="nav-link" href="https://www.psychologytoday.com/us/therapists/clay-klaus-wade-glenolden-pa/1806016" target="_blank" rel="noopener noreferrer">Contact</a>
+    <div class="nav-links" id="nav-menu">
+      <a class="nav-link" href="./about.html">About</a>
+      <a class="nav-link nav-services" href="./what-we-offer/">Services</a>
+      <a class="nav-link" href="https://www.psychologytoday.com/us/therapists/clay-klaus-wade-glenolden-pa/1806016" target="_blank" rel="noopener noreferrer">Contact</a>
+    </div>
     <a class="nav-btn nav-book" href="https://www.psychologytoday.com/us/therapists/clay-klaus-wade-glenolden-pa/1806016" target="_blank" rel="noopener noreferrer">Book a consult<span class="sr-only"> (opens in a new tab)</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
 </header>
 
@@ -37,7 +40,7 @@
       <div class="hero-actions">
         <img class="hero-mark" src="assets/layered-mark-inverse.svg" alt="" width="120" height="102">
         <div class="hero-buttons">
-          <a class="hero-cta hero-cta-book" href="https://www.psychologytoday.com/us/therapists/clay-klaus-wade-glenolden-pa/1806016" target="_blank" rel="noopener noreferrer">Book a free consultation</a>
+          <a class="hero-cta hero-cta-book" href="https://www.psychologytoday.com/us/therapists/clay-klaus-wade-glenolden-pa/1806016" target="_blank" rel="noopener noreferrer">Book a <span class="lg-only">free </span>consult<span class="lg-only">ation</span></a>
           <a class="hero-cta hero-cta-quiet" href="#keep-updated">Keep me updated</a>
         </div>
       </div>
@@ -231,8 +234,8 @@
           <p>Clay currently sees clients as an intern therapist at Sunflower Radiance Counseling in Pennsylvania, supervised by Shannon Kilroy, LPC, and at NEK Family Counseling Center in Vermont, supervised by Rachael Little, LMFT. He sees clients virtually throughout PA and VT, and in person at SRC's office in Glenolden, PA.</p>
         </div>
         <div class="next-card-actions">
-          <a class="next-card-btn" href="https://www.psychologytoday.com/us/therapists/clay-klaus-wade-glenolden-pa/1806016" target="_blank" rel="noopener noreferrer">Book a free consultation in PA<span class="sr-only"> (opens in a new tab)</span></a>
-          <a class="next-card-btn next-card-btn-quiet next-card-btn-out" href="https://scheduler.zoom.us/clay-nek-fcc/virtual-therapy-with-clay" target="_blank" rel="noopener noreferrer">Schedule in VT<span class="sr-only"> (opens in a new tab)</span></a>
+          <a class="next-card-btn" href="https://www.psychologytoday.com/us/therapists/clay-klaus-wade-glenolden-pa/1806016" target="_blank" rel="noopener noreferrer">Book a free consult in PA<span class="sr-only"> (opens in a new tab)</span></a>
+          <a class="next-card-btn next-card-btn-mail" href="mailto:clay@nekfamilycounseling.org?subject=Free%20consultation%20request%3A%20virtual%20therapy%20in%20Vermont&amp;body=Hi%20Clay%2C%0A%0AI%27m%20interested%20in%20scheduling%20a%20free%20consultation%20for%20virtual%20therapy%20in%20Vermont.%20Please%20let%20me%20know%20what%20times%20you%20have%20available.%0A%0AThank%20you%2C%0A">Book a free consult in VT<span class="sr-only"> (opens an email to Clay)</span></a>
         </div>
       </div>
     </div>
@@ -306,6 +309,6 @@
     </div>
   </div>
 </footer>
-<script src="main.js?v=v4-1" defer></script>
+<script src="main.js?v=v4-2" defer></script>
 </body>
 </html>
